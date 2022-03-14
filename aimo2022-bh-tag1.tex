@@ -1,0 +1,2013 @@
+\documentclass[12pt,final,notitlepage,onecolumn,german]{article}%
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[breaklinks=True]{hyperref}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Monday, March 14, 2022 11:01:32}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Satz}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Bemerkung}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Folgerung}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Konvention}
+\newenvironment{convention}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Frage}
+\newenvironment{question}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warnung}
+\newenvironment{warning}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Aufgabe}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\newenvironment{fineprint}{\begin{small}}{\end{small}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\newenvironment{convention}[1][Convention]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\newenvironment{question}[1][Question]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\newenvironment{aufgabe}[1][Aufgabe]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\renewcommand{\figurename}{Fig.}
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\hoffset=-1cm
+\voffset=-1cm
+\setlength\textheight{21.5cm}
+\setlength\textwidth{14cm}
+\newtheoremstyle{plainsl}
+{8pt plus 2pt minus 4pt}
+{8pt plus 2pt minus 4pt}
+{\slshape}
+{0pt}
+{\bfseries}
+{.}
+{5pt plus 1pt minus 1pt}
+{}
+\theoremstyle{plainsl}
+\begin{document}
+
+\title{AIMO 2022 BH1 Geometrie: halbgare Ausarbeitung}
+\author{Darij Grinberg}
+\date{\today}
+\maketitle
+
+\section{Zwei Dreiecke I}
+
+\subsection{Ceva}
+
+Ein Dreieck $ABC$ hei\ss t \textit{entartet}, wenn seine Ecken $A$, $B$ und
+$C$ auf einer Geraden liegen. Entartete Dreiecke werden meistens \"{u}berhaupt
+nicht als Dreiecke angesehen; jedoch will man hin und wieder gewisse
+Eigenschaften von Dreiecken auf sie anwenden, und dies ist manchmal
+zul\"{a}ssig und manchmal nicht. Wir werden also im Folgenden zumindest bei
+allen S\"{a}tzen explizit darauf hinweisen, ob unsere Dreiecke entartet sein
+d\"{u}rfen oder nicht.
+
+Der folgende Satz ist wohlbekannt:
+
+\begin{theorem}
+[Satz von Ceva]\label{thm.ceva}Sei $ABC$ ein nicht-entartetes Dreieck. Seien
+$A^{\prime}$, $B^{\prime}$ und $C^{\prime}$ drei Punkte jeweils auf den
+Geraden $BC$, $CA$ bzw. $AB$. Genau dann schneiden sich die Geraden
+$AA^{\prime}$, $BB^{\prime}$ und $CC^{\prime}$ in einem Punkt, wenn%
+\[
+\dfrac{BA^{\prime}}{A^{\prime}C}\cdot\dfrac{CB^{\prime}}{B^{\prime}A}%
+\cdot\dfrac{AC^{\prime}}{C^{\prime}B}=1
+\]
+gilt. (Siehe Fig. \ref{fig.1}.)
+\end{theorem}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.1909in}{4.1435in}{0pt}{\Qcb{Ein Dreieck mit drei
+%konkurrenten Ecktransversalen}}{\Qlb{fig.1}}{Figure}%
+%{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 4.1909in;  height 4.1435in;  depth 0pt;  original-width 3.9131in;
+%original-height 3.869in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";  tempfilename 'Ceva1.wmf';tempfile-properties "XNPR";}} }%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.869000in,
+natwidth=3.913100in,
+height=4.1435in,
+width=4.1909in
+]%
+{Ceva1.wmf}%
+\caption{Ein Dreieck mit drei konkurrenten Ecktransversalen}%
+\label{fig.1}%
+\end{figure}
+%EndExpansion
+
+
+Wichtige Anmerkungen zu diesem Satz:
+
+\begin{itemize}
+\item Die Strecken sind hier und auch im Folgenden orientiert -- d.h., wir
+w\"{a}hlen auf jeder der Geraden $BC$, $CA$ und $AB$ eine Richtung (egal wie),
+und messen eine Strecke $XY$ positiv wenn $Y$ hinter $X$ in dieser Richtung
+liegt und sonst negativ.
+
+\item Mit \textquotedblleft schneiden sich in einem Punkt\textquotedblright%
+\ meine ich \textquotedblleft schneiden sich in einem Punkt oder sind
+parallel\textquotedblright. Das hei\ss t, ich arbeite in der projektiven
+Ebene. Wenn also mehrere Geraden zueinander parallel sind, dann schneiden sie
+sich in einem unendlich fernen Punkt. Wenn man im Satz von Ceva wissen will,
+ob sie parallel sind oder nicht, hilft der Strahlensatz:
+
+\item In entarteten F\"{a}llen der Sorte $A^{\prime}=B$ bleibt der Satz
+richtig ($0$ und $\infty$ sind beide nicht $1$). Im besonders entarteten Fall
+$A^{\prime}=B^{\prime}=C$ wird er sinnlos ($0\cdot\infty$). Im Fall, wenn die
+Punkte $A$, $B$ und $C$ auf einer Geraden liegen, ist er leider falsch -- die
+Geraden sind immer parallel, aber das Verh\"{a}ltnisprodukt muss nicht $1$
+sein. Daher \textquotedblleft nicht-entartetes Dreieck\textquotedblright.
+
+\item Ein paar gebr\"{a}uchliche aber v\"{o}llig optionale Notationen: Geraden
+wie $AA^{\prime}$, $BB^{\prime}$ und $CC^{\prime}$ in Satz \ref{thm.ceva}
+hei\ss en \textit{Ecktransversalen} (\textquotedblleft
+cevians\textquotedblright\ im Englischen); das Dreieck $A^{\prime}B^{\prime
+}C^{\prime}$ hei\ss t das \textit{Cevadreieck} des Schnittpunktes von
+$AA^{\prime}$, $BB^{\prime}$ und $CC^{\prime}$ (falls dieser Schnittpunkt
+existiert); drei Geraden, die sich in einem Punkt schneiden (oder parallel
+sind), hei\ss en \textit{kopunktal} oder \textit{konpunktal} oder
+\textit{konkurrent}.
+\end{itemize}
+
+Beweisidee zu Satz \ref{thm.ceva}: F\"{u}r die $\Longrightarrow$-Richtung kann
+man eine Parallele zu $BC$ durch $A$ zeichnen und alle
+Streckenverh\"{a}ltnisse auf sie projizieren (mithilfe des Strahlensatzes).
+Den Fall $AA^{\prime}\parallel BB^{\prime}\parallel CC^{\prime}$ sollte man
+eigentlich separat betrachten, oder als Grenzfall (indem man den Schnittpunkt
+von $AA^{\prime}$, $BB^{\prime}$ und $CC^{\prime}$ immer weiter vom Dreieck
+$ABC$ wegschiebt). Die Umkehrung erh\"{a}lt man durch Eindeutigkeit (das
+Verh\"{a}ltnis $\dfrac{BA^{\prime}}{A^{\prime}C}$ bestimmt die Lage des
+Punktes $A^{\prime}$ auf der Geraden $BC$ eindeutig). Details gibt es in den
+meisten Geometrieb\"{u}chern.
+
+Anwendungen von Ceva gibt es zuhauf (ich werde evtl. sp\"{a}ter was dazu
+posten). Hier sind ein paar:
+
+\begin{exercise}
+[Paul Yiu]\label{exe.yiu-inner}Sei $ABC$ ein nicht-entartetes Dreieck. Sei $P$
+ein Punkt. Die Innenwinkelhalbierenden der Winkel $BPC$, $CPA$ und $APB$
+schneiden die Strecken $BC$, $CA$ bzw. $AB$ jeweils in $X$, $Y$ bzw. $Z$. Man
+beweise: Die Geraden $AX$, $BY$ und $CZ$ schneiden sich in einem Punkt. (Siehe
+Fig. \ref{fig.2}.)
+\end{exercise}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.3019in}{4.2968in}{0pt}{\Qcb{Paul Yius
+%Innenwinkelhalbierenden}}{\Qlb{fig.2}}{Figure}%
+%{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 4.3019in;  height 4.2968in;  depth 0pt;  original-width 3.9283in;
+%original-height 3.9232in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";  tempfilename 'Yiu1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.923200in,
+natwidth=3.928300in,
+height=4.2968in,
+width=4.3019in
+]%
+{Yiu1.wmf}%
+\caption{Paul Yius Innenwinkelhalbierenden}%
+\label{fig.2}%
+\end{figure}
+%EndExpansion
+
+
+\textit{L\"{o}sung (Florian):} Wir erinnern uns an den Satz, dass eine
+Winkelhalbierende im Dreieck die Gegenseite im Verh\"{a}ltnis der anliegenden
+Seiten teilt\footnote{Ausf\"{u}hrlich formuliert behauptet dieser Satz
+folgendes: Wenn die Innenwinkelhalbierende des Winkels $CAB$ eines Dreiecks
+$ABC$ die Seite $BC$ im Punkt $D$ schneidet, dann gilt $\dfrac{BD}{DC}%
+=\dfrac{BA}{AC}$.}. Also ist%
+\[
+\dfrac{BX}{XC}=\dfrac{BP}{CP},\ \ \ \ \ \ \ \ \ \ \dfrac{CY}{YA}=\dfrac
+{CP}{AP},\ \ \ \ \ \ \ \ \ \ \text{und}\ \ \ \ \ \ \ \ \ \ \dfrac{AZ}%
+{ZB}=\dfrac{AP}{BP}.
+\]
+Multiplikation dieser drei Gleichungen ergibt%
+\[
+\dfrac{BX}{XC}\cdot\dfrac{CY}{YA}\cdot\dfrac{AZ}{ZB}=\dfrac{BP}{CP}\cdot
+\dfrac{CP}{AP}\cdot\dfrac{AP}{BP}=1.
+\]
+Nach Ceva schneiden sich also $AX$, $BY$ und $CZ$ in einem Punkt.
+
+\begin{exercise}
+[isotomische Punkte]\label{exe.isotomic}Sei $ABC$ ein nicht-entartetes
+Dreieck. Sei $P$ ein Punkt. Seien $A^{\prime}$, $B^{\prime}$ und $C^{\prime}$
+die Schnittpunkte der Geraden $AP$, $BP$ bzw. $CP$ mit den Geraden $BC$, $CA$
+bzw. $AB$. Seien $A^{\prime\prime}$, $B^{\prime\prime}$ und $C^{\prime\prime}$
+die Spiegelbilder der Punkte $A^{\prime}$, $B^{\prime}$ bzw. $C^{\prime}$ an
+den Mittelpunkten der Strecken $BC$, $CA$ bzw. $AB$. Man zeige: Die Geraden
+$AA^{\prime\prime}$, $BB^{\prime\prime}$ und $CC^{\prime\prime}$ schneiden
+sich in einem Punkt.
+\end{exercise}
+
+Letzterer Punkt hei\ss t der zu $P$ \textit{isotomische} (oder
+\textit{isotomisch konjugierte}) Punkt bez\"{u}glich des Dreiecks $ABC$.
+(Siehe Fig. \ref{fig.3}.)%
+
+%TCIMACRO{\FRAME{ftbpFU}{5.083in}{4.9771in}{0pt}{\Qcb{Isotomische Punkte}%
+%}{\Qlb{fig.3}}{Figure}{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 5.083in;  height 4.9771in;  depth 0pt;  original-width 4.2892in;
+%original-height 4.2003in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";  tempfilename 'Isotomic1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=4.200300in,
+natwidth=4.289200in,
+height=4.9771in,
+width=5.083in
+]%
+{Isotomic1.wmf}%
+\caption{Isotomische Punkte}%
+\label{fig.3}%
+\end{figure}
+%EndExpansion
+
+
+\textit{L\"{o}sung:} Nach Definition von $A^{\prime\prime}$ ist $BA^{\prime
+\prime}=A^{\prime}C$ und $A^{\prime\prime}C=BA^{\prime}$, also
+\[
+\dfrac{BA^{\prime\prime}}{A^{\prime\prime}C}=\dfrac{A^{\prime}C}{BA^{\prime}%
+}.
+\]
+Analog kann man erhalten:%
+\begin{align*}
+\dfrac{CB^{\prime\prime}}{B^{\prime\prime}A}  &  =\dfrac{B^{\prime}%
+A}{CB^{\prime}};\\
+\dfrac{AC^{\prime\prime}}{C^{\prime\prime}B}  &  =\dfrac{C^{\prime}%
+B}{AC^{\prime}}.
+\end{align*}
+Daher ist%
+\begin{align*}
+\dfrac{BA^{\prime\prime}}{A^{\prime\prime}C}\cdot\dfrac{CB^{\prime\prime}%
+}{B^{\prime\prime}A}\cdot\dfrac{AC^{\prime\prime}}{C^{\prime\prime}B}  &
+=\dfrac{A^{\prime}C}{BA^{\prime}}\cdot\dfrac{B^{\prime}A}{CB^{\prime}}%
+\cdot\dfrac{C^{\prime}B}{AC^{\prime}}\\
+&  =1\diagup\underbrace{\left(  \dfrac{BA^{\prime}}{A^{\prime}C}\cdot
+\dfrac{CB^{\prime}}{B^{\prime}A}\cdot\dfrac{AC^{\prime}}{C^{\prime}B}\right)
+}_{=1\text{ (nach Ceva)}}\\
+&  =1\diagup1=1.
+\end{align*}
+Nach Ceva folgt die Behauptung.
+
+\begin{exercise}
+[Satz von Reuschle-Terquem; isozyklische Punkte]\label{exe.isocyclic}Sei $ABC$
+ein nicht-entartetes Dreieck. Sei $P$ ein Punkt. Seien $A^{\prime}$,
+$B^{\prime}$ und $C^{\prime}$ die Schnittpunkte der Geraden $AP$, $BP$ bzw.
+$CP$ mit den Geraden $BC$, $CA$ bzw. $AB$. Seien $A^{\prime\prime}$,
+$B^{\prime\prime}$ und $C^{\prime\prime}$ die zweiten Schnittpunkte des
+Umkreises des Dreiecks $A^{\prime}B^{\prime}C^{\prime}$ mit den Geraden $BC$,
+$CA$ bzw. $AB$. (Mit \textquotedblleft zweite Schnittpunkte\textquotedblright%
+\ meine ich die jeweils von $A^{\prime}$, $B^{\prime}$ bzw. $C^{\prime}$
+verschiedenen Schnittpunkte. Wenn der Kreis die Gerade $BC$ ber\"{u}hrt, sind
+allerdings die zwei Schnittpunkte als gleich zu verstehen.)
+
+Man zeige: Die Geraden $AA^{\prime\prime}$, $BB^{\prime\prime}$ und
+$CC^{\prime\prime}$ schneiden sich in einem Punkt.
+\end{exercise}
+
+Letzterer Punkt hei\ss t der zu $P$ \textit{isozyklisch konjugierte} (oder
+kurz \textit{isozyklische}) Punkt bez\"{u}glich des Dreiecks $ABC$. Im
+Englischen hei\ss t er \textquotedblleft cyclocevian conjugate of
+$P$\textquotedblright. (Siehe Fig. \ref{fig.4}.)%
+
+%TCIMACRO{\FRAME{ftbpFU}{5.0906in}{4.5594in}{0pt}{\Qcb{Isoyzklische Punkte}%
+%}{\Qlb{fig.4}}{Figure}{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 5.0906in;  height 4.5594in;  depth 0pt;  original-width 4.5806in;
+%original-height 4.1003in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";  tempfilename 'Cyclocevian1.wmf';tempfile-properties "XNPR";}%
+%}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=4.100300in,
+natwidth=4.580600in,
+height=4.5594in,
+width=5.0906in
+]%
+{Cyclocevian1.wmf}%
+\caption{Isoyzklische Punkte}%
+\label{fig.4}%
+\end{figure}
+%EndExpansion
+
+
+\textit{L\"{o}sung (Richard):} Die Punkte $B^{\prime}$, $B^{\prime\prime}$,
+$C^{\prime}$ und $C^{\prime\prime}$ liegen auf einem Kreis. Nach dem
+Sekantensatz gilt also%
+\[
+AC^{\prime}\cdot AC^{\prime\prime}=AB^{\prime}\cdot AB^{\prime\prime
+}=B^{\prime}A\cdot B^{\prime\prime}A,
+\]
+wobei die Strecken gerichtet sind. Analog gilt%
+\begin{align*}
+BA^{\prime}\cdot BA^{\prime\prime}  &  =C^{\prime}B\cdot C^{\prime\prime}B;\\
+CB^{\prime}\cdot CB^{\prime\prime}  &  =A^{\prime}C\cdot A^{\prime\prime}C.
+\end{align*}
+Hieraus folgt schnell%
+\begin{align*}
+&  \left(  \dfrac{BA^{\prime}}{A^{\prime}C}\cdot\dfrac{CB^{\prime}}{B^{\prime
+}A}\cdot\dfrac{AC^{\prime}}{C^{\prime}B}\right)  \cdot\left(  \dfrac
+{BA^{\prime\prime}}{A^{\prime\prime}C}\cdot\dfrac{CB^{\prime\prime}}%
+{B^{\prime\prime}A}\cdot\dfrac{AC^{\prime\prime}}{C^{\prime\prime}B}\right) \\
+&  =\underbrace{\dfrac{AC^{\prime}\cdot AC^{\prime\prime}}{B^{\prime}A\cdot
+B^{\prime\prime}A}}_{=1}\cdot\underbrace{\dfrac{BA^{\prime}\cdot
+BA^{\prime\prime}}{C^{\prime}B\cdot C^{\prime\prime}B}}_{=1}\cdot
+\underbrace{\dfrac{CB^{\prime}\cdot CB^{\prime\prime}}{A^{\prime}C\cdot
+A^{\prime\prime}C}}_{=1}\\
+&  =1.
+\end{align*}
+Da $\dfrac{BA^{\prime}}{A^{\prime}C}\cdot\dfrac{CB^{\prime}}{B^{\prime}A}%
+\cdot\dfrac{AC^{\prime}}{C^{\prime}B}=1$ ist (nach Ceva), folgt hieraus, dass
+auch $\dfrac{BA^{\prime\prime}}{A^{\prime\prime}C}\cdot\dfrac{CB^{\prime
+\prime}}{B^{\prime\prime}A}\cdot\dfrac{AC^{\prime\prime}}{C^{\prime\prime}%
+B}=1$ ist. Nach Ceva folgt die Behauptung.
+
+\subsection{Menelaos}
+
+Ein Gegenst\"{u}ck zum Satz von Ceva ist der Satz von Menelaos:
+
+\begin{theorem}
+[Satz von Menelaos]\label{thm.menelaos}Sei $ABC$ ein nicht-entartetes Dreieck.
+Seien $A^{\prime}$, $B^{\prime}$ und $C^{\prime}$ drei Punkte jeweils auf den
+Geraden $BC$, $CA$ bzw. $AB$. Genau dann liegen die Punkte $A^{\prime}$,
+$B^{\prime}$ und $C^{\prime}$ auf einer Geraden, wenn%
+\[
+\dfrac{BA^{\prime}}{A^{\prime}C}\cdot\dfrac{CB^{\prime}}{B^{\prime}A}%
+\cdot\dfrac{AC^{\prime}}{C^{\prime}B}=-1
+\]
+gilt. (Siehe Fig. \ref{fig.5}.)
+\end{theorem}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{5.172in}{3.5259in}{0pt}{\Qcb[Satz von Menelaos]{Satz
+%von Menelaos}}{\Qlb{fig.5}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 5.172in;  height 3.5259in;  depth 0pt;
+%original-width 4.6188in;  original-height 3.1405in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'Menelaos1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.140500in,
+natwidth=4.618800in,
+height=3.5259in,
+width=5.172in
+]%
+{Menelaos1.wmf}%
+\caption[Satz von Menelaos]{Satz von Menelaos}%
+\label{fig.5}%
+\end{figure}
+%EndExpansion
+
+
+\begin{exercise}
+[Paul Yiu]\label{exe.yiu-outer}Sei $ABC$ ein nicht-entartetes Dreieck. Sei $P$
+ein Punkt. Die \textbf{Au\ss en}winkelhalbierenden der Winkel $BPC$, $CPA$ und
+$APB$ schneiden die Geraden $BC$, $CA$ bzw. $AB$ jeweils in $X$, $Y$ bzw. $Z$.
+Man zeige: Die Punkte $X$, $Y$ und $Z$ liegen auf einer Geraden.
+\end{exercise}
+
+\textit{L\"{o}sung:} Eine \"{a}hnliche Aufgabe haben wir bereits f\"{u}r die
+Innenwinkelhalbierenden gel\"{o}st (Aufgabe \ref{exe.yiu-inner}), aber jetzt
+m\"{u}ssen wir nat\"{u}rlich Menelaos statt Ceva anwenden.
+
+F\"{u}r die Au\ss enwinkelhalbierende gilt das gleiche Abstandsverh\"{a}ltnis
+wie f\"{u}r die Innenwinkelhalbierende, nur mit einem Minuszeichen. Also gilt
+$\dfrac{BX}{XC}=-\dfrac{BP}{PC}$ und so weiter. Folglich ist%
+\[
+\dfrac{BX}{XC}\cdot\dfrac{CY}{YA}\cdot\dfrac{AZ}{ZB}=\left(  -\dfrac{BP}%
+{CP}\right)  \cdot\left(  -\dfrac{CP}{AP}\right)  \cdot\left(  -\dfrac{AP}%
+{BP}\right)  =-1,
+\]
+und man kann Menelaos anwenden.
+
+\begin{exercise}
+\label{exe.isotomic-line}\textbf{(a)} Zeige ein Analogon zum Satz vom
+isotomischen Punkt (Aufgabe \ref{exe.isotomic}), bei dem Menelaos statt Ceva
+verwendet wird.
+
+\textbf{(b)} Warum gibt es kein solches zum Satz vom isozyklischen Punkt?
+\end{exercise}
+
+\textit{L\"{o}sung (Christian):} \textbf{(a)} Hier ist die analoge Aufgabe:
+Eine Gerade schneide die Seitengeraden $BC$, $CA$ und $AB$ eines Dreiecks
+$ABC$ in den Punkten $A^{\prime}$, $B^{\prime}$ bzw. $C^{\prime}$. Seien
+$A^{\prime\prime}$, $B^{\prime\prime}$ und $C^{\prime\prime}$ die
+Spiegelbilder der Punkte $A^{\prime}$, $B^{\prime}$ bzw. $C^{\prime}$ an den
+Mittelpunkten der Strecken $BC$, $CA$ bzw. $AB$. Man zeige: Die Punkte
+$A^{\prime\prime}$, $B^{\prime\prime}$ und $C^{\prime\prime}$ liegen auf einer Geraden.
+
+Der Beweis hiervon ist fast derselbe wie f\"{u}r Aufgabe \ref{exe.isotomic},
+verwendet aber Menelaos statt Ceva.
+
+\textbf{(b)} Der Umkreis eines entarteten Dreiecks $A^{\prime}B^{\prime
+}C^{\prime}$ ist undefiniert oder eine Gerade; damit bekommt man hier kein
+sinnvolles Resultat.
+
+Im Folgenden bezeichnet $g\cap h$ den Schnittpunkt zweier Geraden $g$ und $h$.
+
+\begin{exercise}
+[Satz von Pascal]\label{exe.pascal}Seien $A$, $B$, $C$, $D$, $E$ und $F$ sechs
+Punkte auf einem Kreis. Man zeige: Die Schnittpunkte%
+\[
+AB\cap DE,\ \ \ \ \ \ \ \ \ \ BC\cap EF\ \ \ \ \ \ \ \ \ \ \text{und}%
+\ \ \ \ \ \ \ \ \ \ CD\cap FA
+\]
+liegen auf einer Geraden. (Siehe Fig. \ref{fig.6}.)
+\end{exercise}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{7.1713in}{7.5296in}{0pt}{\Qcb{Satz von Pascal}%
+%}{\Qlb{fig.6}}{Figure}{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 7.1713in;  height 7.5296in;  depth 0pt;  original-width 6.33in;
+%original-height 6.6486in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";  tempfilename 'Pascal2.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=6.648600in,
+natwidth=6.330000in,
+height=7.5296in,
+width=7.1713in
+]%
+{Pascal2.wmf}%
+\caption{Satz von Pascal}%
+\label{fig.6}%
+\end{figure}
+%EndExpansion
+
+
+\textit{L\"{o}sung:} Seien $X=AB\cap DE$, $Y=BC\cap EF$ und $Z=CD\cap FA$.
+Seien ferner $P=FA\cap BC$ und $Q=BC\cap DE$ und $R=DE\cap FA$. Wir wollen nun
+Menelaos im Dreieck $PQR$ anwenden (auf dessen Seiten $QR$, $RP$ und $PQ$
+jeweils die Punkte $X$, $Z$ bzw. $Y$ liegen). Wir m\"{u}ssen dazu zeigen:%
+\[
+\dfrac{QX}{XR}\cdot\dfrac{RZ}{ZP}\cdot\dfrac{PY}{YQ}=-1.
+\]
+
+
+Doch Menelaos, angewandt auf das Dreieck $PQR$ und die Gerade $CZD$, ergibt%
+\begin{align*}
+\dfrac{RZ}{ZP}\cdot\dfrac{PC}{CQ}\cdot\dfrac{QD}{DR}  &
+=-1,\ \ \ \ \ \ \ \ \ \ \text{also}\\
+\dfrac{RZ}{ZP}  &  =-1\diagup\left(  \dfrac{PC}{CQ}\cdot\dfrac{QD}{DR}\right)
+=-\dfrac{DR}{QD}\cdot\dfrac{CQ}{PC}.
+\end{align*}
+Analog ist%
+\begin{align*}
+\dfrac{PY}{YQ}  &  =-\dfrac{FP}{RF}\cdot\dfrac{ER}{QE}%
+\ \ \ \ \ \ \ \ \ \ \text{und}\\
+\dfrac{QX}{XR}  &  =-\dfrac{BQ}{PB}\cdot\dfrac{AP}{RA}.
+\end{align*}
+Multiplikation dieser drei Gleichungen ergibt%
+\begin{align*}
+&  \dfrac{QX}{XR}\cdot\dfrac{RZ}{ZP}\cdot\dfrac{PY}{YQ}\\
+&  =\left(  -\dfrac{DR}{QD}\cdot\dfrac{CQ}{PC}\right)  \cdot\left(
+-\dfrac{FP}{RF}\cdot\dfrac{ER}{QE}\right)  \cdot\left(  -\dfrac{BQ}{PB}%
+\cdot\dfrac{AP}{RA}\right) \\
+&  =-\dfrac{AP\cdot FP}{PC\cdot PB}\cdot\dfrac{DR\cdot ER}{RA\cdot RF}%
+\cdot\dfrac{CQ\cdot BQ}{QE\cdot QD}=-1,
+\end{align*}
+weil nach dem Sekantensatz jeder der Br\"{u}che gleich $1$ ist. Nach Menelaos
+folgt hieraus die Behauptung.
+
+\begin{exercise}
+[Satz von Gauss]\label{exe.gauss}Sei $ABC$ ein Dreieck. Seien $A^{\prime}$,
+$B^{\prime}$ und $C^{\prime}$ drei Punkte jeweils auf den Geraden $BC$, $CA$
+bzw. $AB$, die auf einer Geraden liegen. Man zeige: Die Mittelpunkte der
+Strecken $AA^{\prime}$, $BB^{\prime}$ und $CC^{\prime}$ liegen ebenfalls auf
+einer Geraden. (Siehe Fig. \ref{fig.7}.)
+\end{exercise}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{6.0107in}{5.111in}{0pt}{\Qcb{Satz von Gauss}%
+%}{\Qlb{fig.7}}{Figure}{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 6.0107in;  height 5.111in;  depth 0pt;  original-width 5.3948in;
+%original-height 4.5832in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";  tempfilename 'Gauss1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=4.583200in,
+natwidth=5.394800in,
+height=5.111in,
+width=6.0107in
+]%
+{Gauss1.wmf}%
+\caption{Satz von Gauss}%
+\label{fig.7}%
+\end{figure}
+%EndExpansion
+
+
+\textit{L\"{o}sung:} (Siehe Fig. \ref{fig.8}.) Seien $M_{a}$, $M_{b}$ und
+$M_{c}$ die Mittelpunkte der Seiten $BC$, $CA$ bzw. $AB$. Dann ist
+$XM_{c}\parallel BA^{\prime}$ (als Mittelparallele im Dreieck $ABA^{\prime}$)
+und $XM_{b}\parallel CA^{\prime}$ (analog). Dies bedeutet, dass beide Geraden
+$XM_{c}$ und $XM_{b}$ zu $BC$ parallel sind. Also fallen diese beiden Geraden
+zusammen. Der Punkt $X$ liegt daher auf der Geraden $M_{b}M_{c}$. Analog
+liegen die Punkte $Y$ und $Z$ auf den Geraden $M_{c}M_{a}$ bzw. $M_{a}M_{b}$.
+Ferner ist $M_{b}M_{c}\parallel BC$ (denn $XM_{c}\parallel BA^{\prime}$), und
+nach dem Strahlensatz ist somit%
+\[
+\dfrac{M_{b}X}{XM_{c}}=\dfrac{CA^{\prime}}{A^{\prime}B}.
+\]
+Analog finden wir%
+\[
+\dfrac{M_{c}Y}{YM_{a}}=\dfrac{AB^{\prime}}{B^{\prime}C}%
+\ \ \ \ \ \ \ \ \ \ \text{und}\ \ \ \ \ \ \ \ \ \ \dfrac{M_{a}Z}{ZM_{b}%
+}=\dfrac{BC^{\prime}}{C^{\prime}A}.
+\]
+Multiplikation dieser drei Gleichungen ergibt%
+\[
+\dfrac{M_{b}X}{XM_{c}}\cdot\dfrac{M_{c}Y}{YM_{a}}\cdot\dfrac{M_{a}Z}{ZM_{b}%
+}=\dfrac{CA^{\prime}}{A^{\prime}B}\cdot\dfrac{AB^{\prime}}{B^{\prime}C}%
+\cdot\dfrac{BC^{\prime}}{C^{\prime}A}=-1
+\]
+nach Menelaos (weil $A^{\prime}$, $B^{\prime}$ und $C^{\prime}$ auf einer
+Geraden liegen). Nach Menelaos (f\"{u}r Dreieck $M_{a}M_{b}M_{c}$) liegen also
+$X$, $Y$ und $Z$ auf einer Geraden (denn $X$, $Y$ und $Z$ liegen auf den
+Geraden $M_{b}M_{c}$, $M_{c}M_{a}$ bzw. $M_{a}M_{b}$). Damit ist die Aufgabe gel\"{o}st.%
+
+%TCIMACRO{\FRAME{ftbpFU}{5.9048in}{4.7136in}{0pt}{\Qcb{Beweis des Satzes von
+%Gauss}}{\Qlb{fig.8}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 5.9048in;  height 4.7136in;  depth 0pt;
+%original-width 5.0949in;  original-height 4.0613in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'Gauss2.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=4.061300in,
+natwidth=5.094900in,
+height=4.7136in,
+width=5.9048in
+]%
+{Gauss2.wmf}%
+\caption{Beweis des Satzes von Gauss}%
+\label{fig.8}%
+\end{figure}
+%EndExpansion
+
+
+\begin{exercise}
+[Satz von Desargues]\label{exe.desargues}Seien $ABC$ und $A^{\prime}B^{\prime
+}C^{\prime}$ zwei nicht-entartete Dreiecke. Man zeige: Die Geraden
+$AA^{\prime}$, $BB^{\prime}$ und $CC^{\prime}$ schneiden sich genau dann in
+einem Punkt, wenn die Punkte%
+\[
+BC\cap B^{\prime}C^{\prime},\ \ \ \ \ \ \ \ \ \ CA\cap C^{\prime}A^{\prime
+}\ \ \ \ \ \ \ \ \ \ \text{und}\ \ \ \ \ \ \ \ \ \ AB\cap A^{\prime}B^{\prime}%
+\]
+auf einer Geraden liegen. (Hierbei wird angenommen, dass die Situation nicht
+\textquotedblleft zu stark ausgeartet ist\textquotedblright\ -- so d\"{u}rfen
+die Punkte $A$ und $A^{\prime}$ beispielsweise nicht zusammenfallen.) (Siehe
+Fig. \ref{fig.9}.)
+\end{exercise}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.795in}{6.2258in}{0pt}{\Qcb{Satz von Desargues}%
+%}{\Qlb{fig.9}}{Figure}{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 4.795in;  height 6.2258in;  depth 0pt;  original-width 4.3197in;
+%original-height 5.6201in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";  tempfilename 'Desargues1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=5.620100in,
+natwidth=4.319700in,
+height=6.2258in,
+width=4.795in
+]%
+{Desargues1.wmf}%
+\caption{Satz von Desargues}%
+\label{fig.9}%
+\end{figure}
+%EndExpansion
+
+
+\textit{L\"{o}sung (Boldizsar):} Seien%
+\[
+X=BC\cap B^{\prime}C^{\prime},\ \ \ \ \ \ \ \ \ \ Y=CA\cap C^{\prime}%
+A^{\prime}\ \ \ \ \ \ \ \ \ \ \text{und}\ \ \ \ \ \ \ \ \ \ Z=AB\cap
+A^{\prime}B^{\prime}.
+\]
+Wir m\"{u}ssen also folgendes zeigen: Die Geraden $AA^{\prime}$, $BB^{\prime}$
+und $CC^{\prime}$ schneiden sich genau dann in einem Punkt, wenn die Punkte
+$X$, $Y$ und $Z$ auf einer Geraden liegen.
+
+Von dieser Behauptung beweisen wir die \textquotedblleft$\Longrightarrow
+$\textquotedblright-Implikation und die \textquotedblleft$\Longleftarrow
+$\textquotedblright-Implikation separat:
+
+$\Longrightarrow:$ Angenommen, die Geraden $AA^{\prime}$, $BB^{\prime}$ und
+$CC^{\prime}$ schneiden sich in einem Punkt. Wir nennen diesen Punkt $P$.
+
+Menelaos im Dreieck $BPC$ f\"{u}r die Gerade $B^{\prime}C^{\prime}X$ ergibt%
+\[
+\dfrac{BX}{XC}\cdot\dfrac{CC^{\prime}}{C^{\prime}P}\cdot\dfrac{PB^{\prime}%
+}{B^{\prime}B}=-1,
+\]
+also%
+\[
+\dfrac{BX}{XC}=-\dfrac{B^{\prime}B}{PB^{\prime}}\cdot\dfrac{C^{\prime}%
+P}{CC^{\prime}}=-\dfrac{BB^{\prime}}{B^{\prime}P}\diagup\dfrac{CC^{\prime}%
+}{C^{\prime}P}.
+\]
+Durch zyklisches Vertauschen der Ecken $A$, $B$ und $C$ (und dementsprechend
+auch der Ecken $A^{\prime}$, $B^{\prime}$ und $C^{\prime}$ sowie der Punkte
+$X$, $Y$ bzw. $Z$) erh\"{a}lt man aus dieser Gleichung die zwei analogen
+Gleichungen%
+\begin{align*}
+\dfrac{CY}{YA}  &  =-\dfrac{CC^{\prime}}{C^{\prime}P}\diagup\dfrac{AA^{\prime
+}}{A^{\prime}P}\ \ \ \ \ \ \ \ \ \ \text{und}\\
+\dfrac{AZ}{ZB}  &  =-\dfrac{AA^{\prime}}{A^{\prime}P}\diagup\dfrac{BB^{\prime
+}}{B^{\prime}P}.
+\end{align*}
+Multiplikation all dieser drei Gleichungen ergibt%
+\begin{align*}
+&  \dfrac{BX}{XC}\cdot\dfrac{CY}{YA}\cdot\dfrac{AZ}{ZB}\\
+&  =\left(  -\dfrac{BB^{\prime}}{B^{\prime}P}\diagup\dfrac{CC^{\prime}%
+}{C^{\prime}P}\right)  \cdot\left(  -\dfrac{CC^{\prime}}{C^{\prime}P}%
+\diagup\dfrac{AA^{\prime}}{A^{\prime}P}\right)  \cdot\left(  -\dfrac
+{AA^{\prime}}{A^{\prime}P}\diagup\dfrac{BB^{\prime}}{B^{\prime}P}\right)  =-1
+\end{align*}
+(Teleskopprodukt). Nach Menelaos folgt hieraus, dass $X$, $Y$ und $Z$ auf
+einer Geraden liegen. Damit ist die \textquotedblleft$\Longrightarrow
+$\textquotedblright-Richtung bewiesen.
+
+$\Longleftarrow:$ Hier gibt es verschiedene M\"{o}glichkeiten. Die vielleicht
+eleganteste ist folgende: Angenommen, die Punkte $X$, $Y$ und $Z$ liegen auf
+einer Geraden. Die Geraden $BC$, $B^{\prime}C^{\prime}$ und $ZY$ schneiden
+sich somit in einem Punkt (n\"{a}mlich im Punkt $X$). Somit k\"{o}nnen wir die
+\textquotedblleft$\Longrightarrow$\textquotedblright-Richtung unserer Aufgabe
+auf die Dreiecke $BB^{\prime}Z$ und $CC^{\prime}Y$ anstelle von den Dreiecken
+$ABC$ bzw. $A^{\prime}B^{\prime}C^{\prime}$ anwenden. Wir erhalten dadurch,
+dass die Punkte%
+\[
+B^{\prime}Z\cap C^{\prime}Y,\ \ \ \ \ \ \ \ \ \ ZB\cap
+YC\ \ \ \ \ \ \ \ \ \ \text{und}\ \ \ \ \ \ \ \ \ \ BB^{\prime}\cap
+CC^{\prime}%
+\]
+auf einer Geraden liegen. Doch diese drei Punkte sind $A^{\prime}$, $A$ und
+$BB^{\prime}\cap CC^{\prime}$. Somit liegen die Punkte $A^{\prime}$, $A$ und
+$BB^{\prime}\cap CC^{\prime}$ auf einer Geraden. Mit anderen Worten: Der Punkt
+$BB^{\prime}\cap CC^{\prime}$ liegt auf der Geraden $AA^{\prime}$. Das
+hei\ss t, die Geraden $AA^{\prime}$, $BB^{\prime}$ und $CC^{\prime}$ schneiden
+sich in einem Punkt. Damit ist auch die \textquotedblleft$\Longleftarrow
+$\textquotedblright-Richtung bewiesen.
+
+\subsection{Trig-Ceva}
+
+Folgende Variante des Satzes von Ceva erlaubt uns, die Konkurrenz von
+Ecktransversalen zu zeigen, ohne ihre Schnittpunkte mit den Seiten zu kennen.
+
+\begin{theorem}
+[Trigonometrische Version des Satzes von Ceva, oder kurz Satz von
+Trig-Ceva]\label{thm.trigceva}Sei $ABC$ ein nicht-entartetes Dreieck, und
+seien $X$, $Y$ und $Z$ drei Punkte in seiner Ebene mit $X\neq A$ und $Y\neq B$
+und $Z\neq C$. Genau dann schneiden sich die Geraden $AX$, $BY$ und $CZ$ in
+einem Punkt, wenn%
+\[
+\dfrac{\sin\measuredangle BAX}{\sin\measuredangle XAC}\cdot\dfrac
+{\sin\measuredangle CBY}{\sin\measuredangle YBA}\cdot\dfrac{\sin\measuredangle
+ACZ}{\sin\measuredangle ZCB}=1
+\]
+gilt. Hierbei sind die Winkel orientiert (und k\"{o}nnen gerne modulo
+$360^{\circ}$ verstanden werden). (Siehe Fig. \ref{fig.10}.)
+\end{theorem}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.3477in}{3.1506in}{0pt}{\Qcb{{}Satz von Trig-Ceva}%
+%}{\Qlb{fig.10}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 4.3477in;  height 3.1506in;  depth 0pt;
+%original-width 4.2053in;  original-height 3.0396in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'TrigCeva1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.039600in,
+natwidth=4.205300in,
+height=3.1506in,
+width=4.3477in
+]%
+{TrigCeva1.wmf}%
+\caption{{}Satz von Trig-Ceva}%
+\label{fig.10}%
+\end{figure}
+%EndExpansion
+
+
+\textit{Beweis:} Man kann Trig-Ceva aus Ceva herleiten. Aber es geht noch
+einfacher: F\"{u}r jeden Punkt $P$ und jede Gerade $g$ bezeichnen wir mit
+$d\left(  P;\ g\right)  $ den orientierten Abstand von $P$ zur Geraden $g$.
+Dabei hei\ss t \textquotedblleft orientiert\textquotedblright, dass wir zu
+jeder Geraden eine Halbebene w\"{a}hlen, in der dieser Abstand positiv sein
+soll, w\"{a}hrend er in der gegen\"{u}berliegenden Halbebene negativ sein
+soll. Dabei w\"{a}hlen wir die Halbebenen f\"{u}r die Geraden $BC$, $CA$ und
+$AB$ so, dass die Punkte $A$, $B$ bzw. $C$ jeweils in den positiven Halbebenen
+liegen (d.h., dass die orientierten Abst\"{a}nde $d\left(  A;\ BC\right)  $,
+$d\left(  B;\ CA\right)  $ und $d\left(  C;\ AB\right)  $ positiv sind).%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.5925in}{3.2862in}{0pt}{\Qcb{{}Beweis des Satzes von
+%Trig-Ceva}}{\Qlb{fig.11}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 4.5925in;  height 3.2862in;  depth 0pt;
+%original-width 4.0672in;  original-height 2.9024in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'TrigCeva2.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=2.902400in,
+natwidth=4.067200in,
+height=3.2862in,
+width=4.5925in
+]%
+{TrigCeva2.wmf}%
+\caption{{}Beweis des Satzes von Trig-Ceva}%
+\label{fig.11}%
+\end{figure}
+%EndExpansion
+
+
+Wir sehen nun leicht ein, dass $\dfrac{\sin\measuredangle BAQ}{\sin
+\measuredangle QAC}=\dfrac{d\left(  Q;\ CA\right)  }{d\left(  Q;\ AB\right)
+}$ f\"{u}r jeden Punkt $Q$ gilt (siehe Fig. \ref{fig.11}). Nehmen wir nun an,
+dass die Geraden $AX$, $BY$ und $CZ$ sich in einem Punkt $Q$ schneiden. Dann
+ist%
+\begin{align*}
+\dfrac{\sin\measuredangle BAX}{\sin\measuredangle XAC}  &  =\dfrac
+{\sin\measuredangle BAQ}{\sin\measuredangle QAC}=\dfrac{d\left(
+Q;\ AB\right)  }{d\left(  Q;\ CA\right)  }\ \ \ \ \ \ \ \ \ \ \text{und}\\
+\dfrac{\sin\measuredangle CBY}{\sin\measuredangle YBA}  &  =\dfrac
+{\sin\measuredangle CBQ}{\sin\measuredangle QBA}=\dfrac{d\left(
+Q;\ BC\right)  }{d\left(  Q;\ AB\right)  }\ \ \ \ \ \ \ \ \ \ \text{und}\\
+\dfrac{\sin\measuredangle ACZ}{\sin\measuredangle ZCB}  &  =\dfrac
+{\sin\measuredangle ACQ}{\sin\measuredangle QCB}=\dfrac{d\left(
+Q;\ CA\right)  }{d\left(  Q;\ BC\right)  }.
+\end{align*}
+Multiplikation dieser drei Gleichungen ergibt%
+\[
+\dfrac{\sin\measuredangle BAX}{\sin\measuredangle XAC}\cdot\dfrac
+{\sin\measuredangle CBY}{\sin\measuredangle YBA}\cdot\dfrac{\sin\measuredangle
+ACZ}{\sin\measuredangle ZCB}=\dfrac{d\left(  Q;\ AB\right)  }{d\left(
+Q;\ CA\right)  }\cdot\dfrac{d\left(  Q;\ BC\right)  }{d\left(  Q;\ AB\right)
+}\cdot\dfrac{d\left(  Q;\ CA\right)  }{d\left(  Q;\ BC\right)  }=1.
+\]
+Damit ist eine Richtung von Trig-Ceva bewiesen. Die andere folgt leicht durch
+einen Umkehrschluss, bei dem folgendes verwendet wird: Zwei Punkte $Q$ und
+$Q^{\prime}$ liegen genau dann auf einer Geraden mit $A$, wenn $\dfrac
+{d\left(  Q;\ AB\right)  }{d\left(  Q;\ CA\right)  }=\dfrac{d\left(
+Q^{\prime};\ AB\right)  }{d\left(  Q^{\prime};\ CA\right)  }$ gilt (warum?).
+
+\begin{theorem}
+\label{thm.jacobi}Sei $ABC$ ein Dreieck. Auf seinen Seiten $BC$, $CA$ und $AB$
+werden Dreiecke $BXC$, $CYA$ bzw. $AZB$ derart aufgesetzt, dass%
+\begin{align*}
+\measuredangle ZAB  &  =\measuredangle CAY\neq0^{\circ},\\
+\measuredangle XBC  &  =\measuredangle ABZ\neq0^{\circ}%
+\ \ \ \ \ \ \ \ \ \ \text{und}\\
+\measuredangle YCA  &  =\measuredangle BCX\neq0^{\circ}%
+\end{align*}
+(mit orientierten Winkeln) gilt. Dann schneiden sich die Geraden $AX$, $BY$
+und $CZ$ in einem Punkt. (Siehe Fig. \ref{fig.12}.)
+\end{theorem}
+
+Man beachte, dass die \textquotedblleft$\neq0^{\circ}$\textquotedblright%
+-Bedingungen in Satz \ref{thm.jacobi} wichtig sind. W\"{a}ren zum Beispiel die
+sechs Winkel $\measuredangle ZAB$, $\measuredangle CAY$, $\measuredangle XBC$
+usw. alle gleich $0^{\circ}$, dann w\"{a}ren $X$, $Y$ und $Z$ einfach
+irgendwelche Punkte auf den Geraden $BC$, $CA$ bzw. $AB$ (ihre genauere Lage
+auf diesen Geraden w\"{a}re durch die Winkel nicht bestimmt), und die
+Behauptung von Satz \ref{thm.jacobi} w\"{u}rde meistens nicht gelten.%
+
+%TCIMACRO{\FRAME{ftbpFU}{5.1042in}{5.2923in}{0pt}{\Qcb{Satz von Jacobi}%
+%}{\Qlb{fig.12}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 5.1042in;  height 5.2923in;  depth 0pt;
+%original-width 4.7958in;  original-height 4.9754in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'Jacobi1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=4.975400in,
+natwidth=4.795800in,
+height=5.2923in,
+width=5.1042in
+]%
+{Jacobi1.wmf}%
+\caption{Satz von Jacobi}%
+\label{fig.12}%
+\end{figure}
+%EndExpansion
+
+
+\textit{Beweis von Satz \ref{thm.jacobi}:} Seien $\alpha=\measuredangle CAB$,
+$\beta=\measuredangle ABC$ und $\gamma=\measuredangle BCA$. Seien%
+\[
+x=\measuredangle ZAB=\measuredangle CAY,\ \ \ \ \ \ \ \ \ \ y=\measuredangle
+XBC=\measuredangle ABZ\ \ \ \ \ \ \ \ \ \ \text{und}%
+\ \ \ \ \ \ \ \ \ \ z=\measuredangle YCA=\measuredangle BCX.
+\]
+
+
+Aus Trig-Ceva folgt%
+\[
+\dfrac{\sin\measuredangle BAX}{\sin\measuredangle XAC}\cdot\dfrac
+{\sin\measuredangle CBX}{\sin\measuredangle XBA}\cdot\dfrac{\sin\measuredangle
+ACX}{\sin\measuredangle XCB}=1,
+\]
+da sich die Geraden $AX$, $BX$ und $CX$ in einem Punkt schneiden. Aufl\"{o}sen
+nach $\dfrac{\sin\measuredangle BAX}{\sin\measuredangle XAC}$ ergibt%
+\begin{align*}
+\dfrac{\sin\measuredangle BAX}{\sin\measuredangle XAC}  &  =1\diagup\left(
+\dfrac{\sin\measuredangle CBX}{\sin\measuredangle XBA}\cdot\dfrac
+{\sin\measuredangle ACX}{\sin\measuredangle XCB}\right) \\
+&  =1\diagup\left(  \dfrac{-\sin y}{\sin\left(  y+\beta\right)  }\cdot
+\dfrac{\sin\left(  z+\gamma\right)  }{-\sin z}\right) \\
+&  =\dfrac{\sin\left(  y+\beta\right)  }{\sin y}\diagup\dfrac{\sin\left(
+z+\gamma\right)  }{\sin z}.
+\end{align*}
+Analoge Gleichungen lassen sich f\"{u}r $\dfrac{\sin\measuredangle CBY}%
+{\sin\measuredangle YBA}$ und $\dfrac{\sin\measuredangle ACZ}{\sin
+\measuredangle ZCB}$ aufstellen. Multiplikation dieser drei Gleichungen
+ergibt
+\begin{align*}
+&  \dfrac{\sin\measuredangle BAX}{\sin\measuredangle XAC}\cdot\dfrac
+{\sin\measuredangle CBX}{\sin\measuredangle XBA}\cdot\dfrac{\sin\measuredangle
+ACX}{\sin\measuredangle XCB}\\
+&  =\left(  \dfrac{\sin\left(  y+\beta\right)  }{\sin y}\diagup\dfrac
+{\sin\left(  z+\gamma\right)  }{\sin z}\right)  \cdot\left(  \dfrac
+{\sin\left(  z+\gamma\right)  }{\sin z}\diagup\dfrac{\sin\left(
+x+\alpha\right)  }{\sin x}\right) \\
+&  \ \ \ \ \ \ \ \ \ \ \cdot\left(  \dfrac{\sin\left(  x+\alpha\right)  }{\sin
+x}\diagup\dfrac{\sin\left(  y+\beta\right)  }{\sin y}\right) \\
+&  =1\ \ \ \ \ \ \ \ \ \ \left(  \text{weil Teleskopprodukt}\right)  .
+\end{align*}
+Aus Trig-Ceva folgt somit, dass die Geraden $AX$, $BY$ und $CZ$ sich in einem
+Punkt schneiden.
+
+Aus Trig-Ceva folgt leicht noch eine andere Version von Ceva:
+
+\begin{theorem}
+[Satz von Ceva auf dem Kreis]\label{thm.kreisceva}Seien $A$, $B$, $C$, $X$,
+$Y$ und $Z$ sechs paarweise verschiedene Punkte auf einem Kreis. Genau dann
+schneiden sich die Geraden $AX$, $BY$ und $CZ$ in einem Punkt, wenn%
+\[
+\dfrac{BX}{XC}\cdot\dfrac{CY}{YA}\cdot\dfrac{AZ}{ZB}=1
+\]
+gilt. Hierbei sind die Strecken orientiert, und zwar folgenderma\ss en: Die
+Strecken $BX$, $XC$, $CY$, $YA$, $AZ$ und $ZB$ sollen genau dann positiv sein,
+wenn die jeweiligen Winkel $\measuredangle BAX$, $\measuredangle XAC$,
+$\measuredangle CBY$, $\measuredangle YBA$, $\measuredangle ACZ$ und
+$\measuredangle ZCB$ im Uhrzeigersinn orientiert sind. (Siehe Fig.
+\ref{fig.13}.)
+\end{theorem}
+
+In der Praxis hat niemand in einer Klausur die Zeit, die richtige Orientierung
+nachzupr\"{u}fen; man macht sich an einer Figur klar, dass sie zumindest in
+einem Fall stimmt, und argumentiert dann, dass der allgemeine Fall nicht
+schlimmer sein kann (dahinter steckt die \textquotedblleft Permanenz von
+polynomialen Identit\"{a}ten\textquotedblright).%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.7653in}{4.6662in}{0pt}{\Qcb{{}Satz von Ceva auf dem
+%Kreis}}{\Qlb{fig.13}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 4.7653in;  height 4.6662in;  depth 0pt;
+%original-width 4.6111in;  original-height 4.5146in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'KreisCeva1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=4.514600in,
+natwidth=4.611100in,
+height=4.6662in,
+width=4.7653in
+]%
+{KreisCeva1.wmf}%
+\caption{{}Satz von Ceva auf dem Kreis}%
+\label{fig.13}%
+\end{figure}
+%EndExpansion
+
+
+\textit{Beweis:} Sei $R$ der Umkreisradius des Dreiecks $ABC$. Dann ist $R$
+auch der Umkreisradius des Dreiecks $ABX$. Nach dem erweiterten
+Sinussatz\footnote{Der \textit{erweiterte Sinussatz} besagt folgendes: Ist $R$
+der Umkreisradius eines Dreiecks $ABC$, dann gilt $BC=2R\sin\measuredangle
+BAC$.} ist also%
+\[
+BX=2R\sin\measuredangle BAX.
+\]
+Und analog gilt%
+\begin{align*}
+XC  &  =2R\sin\measuredangle XAC;\ \ \ \ \ \ \ \ \ \ CY=2R\sin\measuredangle
+CBY;\\
+YA  &  =2R\sin\measuredangle YBA;\ \ \ \ \ \ \ \ \ \ AZ=2R\sin\measuredangle
+ACZ;\\
+ZB  &  =2R\sin\measuredangle ZCB.
+\end{align*}
+Somit gilt%
+\begin{align*}
+\dfrac{BX}{XC}\cdot\dfrac{CY}{YA}\cdot\dfrac{AZ}{ZB}  &  =\dfrac
+{2R\sin\measuredangle BAX}{2R\sin\measuredangle XAC}\cdot\dfrac{2R\sin
+\measuredangle CBY}{2R\sin\measuredangle YBA}\cdot\dfrac{2R\sin\measuredangle
+ACZ}{2R\sin\measuredangle ZCB}\\
+&  =\dfrac{\sin\measuredangle BAX}{\sin\measuredangle XAC}\cdot\dfrac
+{\sin\measuredangle CBY}{\sin\measuredangle YBA}\cdot\dfrac{\sin\measuredangle
+ACZ}{\sin\measuredangle ZCB}.
+\end{align*}
+Daher folgt Satz \ref{thm.kreisceva} aus Trig-Ceva.
+
+\begin{exercise}
+[isogonale Punkte]\label{exe.isogonal}Sei $ABC$ ein nicht-entartetes Dreieck.
+Sei $P$ ein Punkt. Man beweise: Die Spiegelbilder der Geraden $AP$, $BP$ und
+$CP$ an den Winkelhalbierenden der Winkel $CAB$, $ABC$ bzw. $BCA$ schneiden
+sich in einem Punkt.
+\end{exercise}
+
+Letzterer Punkt hei\ss t der zu $P$ \emph{isogonal konjugierte} (oder kurz
+\emph{isogonale}) Punkt bez\"{u}glich des Dreiecks $ABC$. (Siehe Fig.
+\ref{fig.14}.) Zum Beispiel ist der H\"{o}henschnittpunkt zum
+Umkreismittelpunkt isogonal (warum?). Die Inkreis- und Ankreismittelpunkte
+sind jeweils zu sich selbst isogonal.%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.3985in}{5.2541in}{0pt}{\Qcb{Isogonale Punkte}%
+%}{\Qlb{fig.14}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 4.3985in;  height 5.2541in;  depth 0pt;
+%original-width 3.6979in;  original-height 4.4231in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'Isogonal1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=4.423100in,
+natwidth=3.697900in,
+height=5.2541in,
+width=4.3985in
+]%
+{Isogonal1.wmf}%
+\caption{Isogonale Punkte}%
+\label{fig.14}%
+\end{figure}
+%EndExpansion
+
+
+\textit{L\"{o}sung:} Seien $X$, $Y$ und $Z$ drei (jeweils von $A$, $B$ bzw.
+$C$ verschiedene) Punkte auf diesen drei Spiegelbildern (siehe Fig.
+\ref{fig.14b}). Dann \"{u}berf\"{u}hrt die Spiegelung an der
+Winkelhalbierenden des Winkels $CAB$ die Gerade $AP$ in die Gerade $AX$,
+w\"{a}hrend sie die Geraden $AB$ und $AC$ ineinander \"{u}berf\"{u}hrt. Somit
+ist $\measuredangle BAX^{\prime}=\measuredangle PAC$ und $\measuredangle
+X^{\prime}AC=\measuredangle BAP$, und analoge Gleichungen gelten f\"{u}r vier
+andere Winkel. Somit ist%
+\begin{align*}
+&  \dfrac{\sin\measuredangle BAX^{\prime}}{\sin\measuredangle X^{\prime}%
+AC}\cdot\dfrac{\sin\measuredangle CBY^{\prime}}{\sin\measuredangle Y^{\prime
+}BA}\cdot\dfrac{\sin\measuredangle ACZ^{\prime}}{\sin\measuredangle Z^{\prime
+}CB}\\
+&  =\dfrac{\sin\measuredangle PAC}{\sin\measuredangle BAP}\cdot\dfrac
+{\sin\measuredangle PBA}{\sin\measuredangle CBP}\cdot\dfrac{\sin\measuredangle
+PCB}{\sin\measuredangle ACP}\\
+&  =1\diagup\underbrace{\left(  \dfrac{\sin\measuredangle BAP}{\sin
+\measuredangle PAC}\cdot\dfrac{\sin\measuredangle CBP}{\sin\measuredangle
+PBA}\cdot\dfrac{\sin\measuredangle ACP}{\sin\measuredangle PCB}\right)
+}_{\substack{=1\\\text{(nach Trig-Ceva, da die Geraden }AP\text{, }BP\text{
+und }CP\\\text{sich in einem Punkt schneiden)}}}\\
+&  =1\diagup1=1.
+\end{align*}
+Aus Trig-Ceva folgt nun wieder, dass sich die Geraden $AX$, $BY$ und $CZ$ in
+einem Punkt schneiden. Diese Geraden sind aber genau die Spiegelbilder der
+Geraden $AP$, $BP$ und $CP$ an den Winkelhalbierenden der Winkel $CAB$, $ABC$
+bzw. $BCA$. Damit ist die Aufgabe gel\"{o}st.%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.2045in}{5.1177in}{0pt}{\Qcb{Beweis zu isogonalen
+%Punkten}}{\Qlb{fig.14b}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 4.2045in;  height 5.1177in;  depth 0pt;
+%original-width 3.6598in;  original-height 4.4612in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'Isogonal2.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=4.461200in,
+natwidth=3.659800in,
+height=5.1177in,
+width=4.2045in
+]%
+{Isogonal2.wmf}%
+\caption{Beweis zu isogonalen Punkten}%
+\label{fig.14b}%
+\end{figure}
+%EndExpansion
+
+
+\begin{exercise}
+Seien $X$, $Y$ und $Z$ die Fu\ss punkte der von $A$, $B$ bzw. $C$ ausgehenden
+H\"{o}hen eines Dreiecks $ABC$. Auf dem Feuerbachkreis (d.h., auf dem Umkreis
+des Dreiecks $XYZ$) seien $X^{\prime}$, $Y^{\prime}$ und $Z^{\prime}$ die zu
+den Punkten $X$, $Y$ bzw. $Z$ diametral gegen\"{u}berliegenden Punkte. Man
+zeige: Die Geraden $AX^{\prime}$, $BY^{\prime}$ und $CZ^{\prime}$ schneiden
+sich in einem Punkt.
+\end{exercise}
+
+Dieser Punkt hei\ss t \emph{Prasolovpunkt} des Dreiecks $ABC$. (Siehe Fig.
+\ref{fig.15}.)%
+
+%TCIMACRO{\FRAME{ftbpFU}{5.0203in}{4.2934in}{0pt}{\Qcb{Der Prasolovpunkt}%
+%}{\Qlb{fig.15}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 5.0203in;  height 4.2934in;  depth 0pt;
+%original-width 4.4663in;  original-height 3.8156in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'Prasolov1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.815600in,
+natwidth=4.466300in,
+height=4.2934in,
+width=5.0203in
+]%
+{Prasolov1.wmf}%
+\caption{Der Prasolovpunkt}%
+\label{fig.15}%
+\end{figure}
+%EndExpansion
+
+
+\textit{L\"{o}sung:} Seien $\alpha$, $\beta$ und $\gamma$ die Winkel von
+$\bigtriangleup ABC$ bei $A$, $B$, $C$.
+
+Ein paar Bemerkungen vorneweg: Da die Punkte $Y^{\prime}$ und $Z^{\prime}$ auf
+dem Feuerbachkreis jeweils den Punkten $Y$ bzw. $Z$ diametral
+gegen\"{u}berliegen, sind $YY^{\prime}$ und $ZZ^{\prime}$ Durchmesser dieses
+Feuerbachkreises. Somit sind alle Winkel im Viereck $YZ^{\prime}Y^{\prime}Z$
+rechte Winkel (nach Thales). Daher ist $YZ^{\prime}Y^{\prime}Z$ ein Rechteck,
+und daraus folgt $YZ^{\prime}=ZY^{\prime}$. Analog gilt $ZX^{\prime
+}=XZ^{\prime}$ und $XY^{\prime}=YX^{\prime}$. Da $YZ^{\prime}Y^{\prime}Z$ ein
+Rechteck ist, gilt ferner $\measuredangle ZYZ^{\prime}=90^{\circ}$. Analog ist
+$\measuredangle XZX^{\prime}=90^{\circ}$.
+
+Ferner ist bekannt, dass $\measuredangle BZX=\gamma$ ist. (Dies folgt aus dem
+Sehnenviereckssatz, nachdem man bemerkt, dass die H\"{o}henfu\ss punkte $Z$
+und $X$ beide auf dem Thaleskreis \"{u}ber $CA$ liegen.)%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.6518in}{4.0732in}{0pt}{\Qcb{Beweis zum
+%Prasolovpunkt}}{\Qlb{fig.16}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 4.6518in;  height 4.0732in;  depth 0pt;
+%original-width 4.0893in;  original-height 3.5784in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'Prasolov3.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.578400in,
+natwidth=4.089300in,
+height=4.0732in,
+width=4.6518in
+]%
+{Prasolov3.wmf}%
+\caption{Beweis zum Prasolovpunkt}%
+\label{fig.16}%
+\end{figure}
+%EndExpansion
+
+
+Wir wollen nun Trig-Ceva anwenden; dazu brauchen wir $\dfrac{\sin
+\measuredangle BAX^{\prime}}{\sin\measuredangle X^{\prime}AC}$. Wir machen
+daf\"{u}r Sinusjagd (siehe Fig. \ref{fig.16}):%
+\[
+\sin\measuredangle BAX^{\prime}=\sin\measuredangle ZAX^{\prime}=ZX^{\prime
+}\cdot\dfrac{\sin\measuredangle AZX^{\prime}}{AX^{\prime}}%
+\ \ \ \ \ \ \ \ \ \ \left(  \text{Sinussatz im }\bigtriangleup ZAX^{\prime
+}\right)
+\]
+und analog%
+\[
+\sin\measuredangle X^{\prime}AC=YX^{\prime}\cdot\dfrac{\sin\measuredangle
+AYX^{\prime}}{AX^{\prime}}.
+\]
+Division ergibt%
+\begin{align*}
+\dfrac{\sin\measuredangle BAX^{\prime}}{\sin\measuredangle X^{\prime}AC}  &
+=\dfrac{ZX^{\prime}\cdot\dfrac{\sin\measuredangle AZX^{\prime}}{AX^{\prime}}%
+}{YX^{\prime}\cdot\dfrac{\sin\measuredangle AYX^{\prime}}{AX^{\prime}}}%
+=\dfrac{ZX^{\prime}}{YX^{\prime}}\cdot\dfrac{\sin\measuredangle AZX^{\prime}%
+}{\sin\measuredangle AYX^{\prime}}\\
+&  =\dfrac{ZX^{\prime}}{YX^{\prime}}\cdot\dfrac{\sin\left(  90^{\circ}%
+-\gamma\right)  }{\sin\left(  90^{\circ}-\beta\right)  },
+\end{align*}
+denn wir haben
+\[
+\measuredangle AZX^{\prime}=180^{\circ}-\underbrace{\measuredangle
+XZX^{\prime}}_{=90^{\circ}}-\underbrace{\measuredangle BZX}_{=\gamma
+}=180^{\circ}-90^{\circ}-\gamma=90^{\circ}-\gamma
+\]
+und analog $\measuredangle AYX^{\prime}=90^{\circ}-\beta$.
+
+Multiplizieren wir diese Gleichung mit den zwei analogen, dann erhalten wir%
+\begin{align*}
+&  \dfrac{\sin\measuredangle BAX^{\prime}}{\sin\measuredangle X^{\prime}%
+AC}\cdot\dfrac{\sin\measuredangle CBY^{\prime}}{\sin\measuredangle Y^{\prime
+}BA}\cdot\dfrac{\sin\measuredangle ACZ^{\prime}}{\sin\measuredangle Z^{\prime
+}CB}\\
+&  =\left(  \dfrac{ZX^{\prime}}{YX^{\prime}}\cdot\dfrac{\sin\left(  90^{\circ
+}-\gamma\right)  }{\sin\left(  90^{\circ}-\beta\right)  }\right)  \cdot\left(
+\dfrac{XY^{\prime}}{ZY^{\prime}}\cdot\dfrac{\sin\left(  90^{\circ}%
+-\alpha\right)  }{\sin\left(  90^{\circ}-\gamma\right)  }\right)  \cdot\left(
+\dfrac{YZ^{\prime}}{XZ^{\prime}}\cdot\dfrac{\sin\left(  90^{\circ}%
+-\beta\right)  }{\sin\left(  90^{\circ}-\gamma\right)  }\right) \\
+&  =\dfrac{ZX^{\prime}}{YX^{\prime}}\cdot\dfrac{XY^{\prime}}{ZY^{\prime}}%
+\cdot\dfrac{YZ^{\prime}}{XZ^{\prime}}=1\ \ \ \ \ \ \ \ \ \ \left(  \text{denn
+}ZX^{\prime}=XZ^{\prime}\text{ und }XY^{\prime}=YX^{\prime}\text{ und
+}YZ^{\prime}=ZY^{\prime}\right)
+\end{align*}
+Nach Trig-Ceva folgt hieraus die gew\"{u}nschte Aussage.
+
+\textit{Alternativl\"{o}sung (Jurij) (skizziert):} Seien $\widetilde{X}$,
+$\widetilde{Y}$ und $\widetilde{Z}$ die Bilder von $X$, $Y$ bzw. $Z$ bei der
+Inversion am Umkreis des Dreiecks $ABC$. Sei $O$ der Mittelpunkt dieses
+Umkreises. Nun zeigen wir:
+
+\begin{itemize}
+\item Die Geraden $A\widetilde{X}$, $B\widetilde{Y}$ und $C\widetilde{Z}$
+schneiden sich in einem Punkt. (Dies ist \"{a}quivalent dazu, dass die Kreise
+$AOX$, $BOY$ und $COZ$ sich in einem zweiten Punkt au\ss er $O$ schneiden.
+Doch diesen Punkt kann man direkt beschreiben als den Punkt $O^{\prime}$ auf
+der Geraden $OH$, der $HO\cdot HO^{\prime}=HA\cdot HX=HB\cdot HY=HC\cdot HZ$
+erf\"{u}llt. Dass ein solcher Punkt $O^{\prime}$ existiert, ist bekannt.)
+
+\item Die Geraden $AX^{\prime}$, $BY^{\prime}$ und $CZ^{\prime}$ sind die
+Spiegelbilder der Geraden $A\widetilde{X}$, $B\widetilde{Y}$ und
+$C\widetilde{Z}$ an den entsprechenden Winkelhalbierenden des Dreiecks $ABC$.
+(Dies zeigt man anscheinend durch Winkeljagd.)
+\end{itemize}
+
+\begin{exercise}
+[Satz von Haruki]Gegeben seien drei Kreise $k$, $\ell$ und $m$ mit insgesamt
+sechs Schnittpunkten $A$, $B$, $C$, $D$, $E$ und $F$, in dem Sinne dass%
+\[
+\ell\cap m=\left\{  A,D\right\}  ,\ \ \ \ \ \ \ \ \ \ m\cap k=\left\{
+B,E\right\}  \ \ \ \ \ \ \ \ \ \ \text{und}\ \ \ \ \ \ \ \ \ \ k\cap
+\ell=\left\{  C,F\right\}
+\]
+ist. Zeige: $AE\cdot BF\cdot CD=EC\cdot FA\cdot DB$. (Siehe Fig. \ref{fig.17}.)
+\end{exercise}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.889in}{5.1847in}{0pt}{\Qcb{{}Satz von Haruki}%
+%}{\Qlb{fig.17}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 4.889in;  height 5.1847in;  depth 0pt;
+%original-width 4.9644in;  original-height 5.2668in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'Haruki1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=5.266800in,
+natwidth=4.964400in,
+height=5.1847in,
+width=4.889in
+]%
+{Haruki1.wmf}%
+\caption{{}Satz von Haruki}%
+\label{fig.17}%
+\end{figure}
+%EndExpansion
+
+
+\begin{exercise}
+\label{aufg.BZ-CY-AD}Sei $D$ ein Punkt auf der Seite $BC$ eines Dreiecks
+$ABC$. Seien $Y$ und $Z$ die Inkreismittelpunkte der Dreiecke $ABD$ bzw.
+$ACD$. Man beweise, dass sich die Geraden $BZ$, $CY$ und $AD$ genau dann in
+einem Punkt schneiden, wenn $AD$ die Winkelhalbierende des Winkels $CAB$ ist.
+(Siehe Fig. \ref{fig.18}.)
+\end{exercise}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.7416in}{3.6479in}{0pt}{\Qcb{{}Zu Aufgabe
+%\ref{aufg.BZ-CY-AD}}}{\Qlb{fig.18}}{Figure}%
+%{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 4.7416in;  height 3.6479in;  depth 0pt;  original-width 4.5883in;
+%original-height 3.5242in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";  tempfilename 'BZCYAD1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.524200in,
+natwidth=4.588300in,
+height=3.6479in,
+width=4.7416in
+]%
+{BZCYAD1.wmf}%
+\caption{{}Zu Aufgabe \ref{aufg.BZ-CY-AD}}%
+\label{fig.18}%
+\end{figure}
+%EndExpansion
+
+
+\begin{exercise}
+\label{aufg.6-punkte-inversion-ceva}Seien $A$, $B$, $C$, $X$, $Y$ und $Z$
+sechs paarweise verschiedene Punkte auf einem Kreis. Sei $k$ ein weiterer
+Kreis. Seien $A^{\prime}$, $B^{\prime}$, $C^{\prime}$, $X^{\prime}$,
+$Y^{\prime}$ und $Z^{\prime}$ die Bilder von $A$, $B$, $C$, $X$, $Y$ bzw. $Z$
+bei der Inversion an $k$. Man zeige: Genau dann schneiden sich die Geraden
+$AX$, $BY$ und $CZ$ in einem Punkt, wenn sich die Geraden $A^{\prime}%
+X^{\prime}$, $B^{\prime}Y^{\prime}$ und $C^{\prime}Z^{\prime}$ in einem Punkt
+schneiden. (Siehe Fig. \ref{fig.19}.)
+
+[\textbf{Zusatz:} Man zeige in diesem Fall, dass diese beiden Schnittpunkte
+mit dem Zentrum von $k$ auf einer Geraden liegen.]
+\end{exercise}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{6.3885in}{6.2877in}{0pt}{\Qcb{{}Zu Aufgabe
+%\ref{aufg.6-punkte-inversion-ceva}}}{\Qlb{fig.19}}{Figure}%
+%{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 6.3885in;  height 6.2877in;  depth 0pt;  original-width 6.0157in;
+%original-height 5.9192in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";  tempfilename 'Kreis6Punkte1.wmf';tempfile-properties "XNPR";}%
+%}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=5.919200in,
+natwidth=6.015700in,
+height=6.2877in,
+width=6.3885in
+]%
+{Kreis6Punkte1.wmf}%
+\caption{{}Zu Aufgabe \ref{aufg.6-punkte-inversion-ceva}}%
+\label{fig.19}%
+\end{figure}
+%EndExpansion
+
+
+\subsection{Steiner und seine Folgerungen}
+
+Mit dem Satz von Ceva (direkt angewendet auf ein gegebenes Dreieck $ABC$)
+l\"{a}\ss t sich zeigen, dass die H\"{o}hen, die Seitenhalbierenden und die
+Winkelhalbierenden eines Dreiecks $ABC$ konpunktal sind. F\"{u}r die
+Mittelsenkrechten ist es aber nicht mehr so einfach, da sie keine
+Ecktransversalen sind. Vergessen wir einmal, dass ihre Konpunktalit\"{a}t
+ohnehin klar ist, und versuchen wir ein allgemeines Kriterium zu finden.
+
+Der Satz von Steiner (aka Satz von Carnot) ist ein notwendiges und
+hinreichendes Kriterium f\"{u}r die Konkurrenz von drei Geraden, die zu den
+Seiten eines Dreiecks senkrecht sind:
+
+\begin{theorem}
+[Satz von Carnot-Steiner (bekannt als Satz von Steiner oder als Satz von
+Carnot)]\label{thm.carnot-steiner}Sei $ABC$ ein nicht-entartetes Dreieck.
+Seien $X$, $Y$ und $Z$ drei beliebige Punkte. Genau dann schneiden sich die
+Senkrechten zu $BC$, $CA$ und $AB$ durch $X$, $Y$ bzw. $Z$ in einem Punkt,
+wenn%
+\[
+BX^{2}-XC^{2}+CY^{2}-YA^{2}+AZ^{2}-ZB^{2}=0
+\]
+gilt. (Siehe Fig. \ref{fig.20} f\"{u}r eine Konfiguration, die diese zwei
+Bedingungen \textbf{nicht} erf\"{u}llt.)
+\end{theorem}
+
+Hier ist es egal, ob die Strecken orientiert sind, denn sie werden ohnehin
+quadriert. Daher kann man auch $CX^{2}$ statt $XC^{2}$ schreiben.%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.1283in}{3.625in}{0pt}{\Qcb{{}Satz von
+%Carnot-Steiner}}{\Qlb{fig.20}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 4.1283in;  height 3.625in;  depth 0pt;
+%original-width 4.3448in;  original-height 3.8116in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'Steiner2.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.811600in,
+natwidth=4.344800in,
+height=3.625in,
+width=4.1283in
+]%
+{Steiner2.wmf}%
+\caption{{}Satz von Carnot-Steiner}%
+\label{fig.20}%
+\end{figure}
+%EndExpansion
+
+
+Zum Beweis ein Lemma:
+
+\begin{lemma}
+\label{lem.steiner-lem}Seien $X$, $Y$, $A$ und $B$ vier Punkte. Genau dann
+gilt $XY\perp AB$, wenn $AX^{2}-AY^{2}=BX^{2}-BY^{2}$ gilt. (Hierbei tun wir
+so, dass $XY\perp AB$ auch dann gilt, wenn $X=Y$ oder $A=B$ ist.)
+\end{lemma}
+
+\textit{Beweis von Lemma \ref{lem.steiner-lem}:} O. B. d. A. sei $X\neq Y$.
+Seien $P$ und $Q$ die Fu\ss punkte der Lote von $A$ bzw. $B$ auf die Gerade
+$XY$. (Siehe Fig. \ref{fig.21}.) Nach Pythagoras ist dann%
+\[
+AX^{2}=AP^{2}+PX^{2}\ \ \ \ \ \ \ \ \ \ \text{und}\ \ \ \ \ \ \ \ \ \ AY^{2}%
+=AP^{2}+PY^{2}.
+\]
+Also ist (wobei wir orientierte Strecken auf der Geraden $XY$ verwenden)%
+\begin{align*}
+AX^{2}-AY^{2}  &  =\left(  AP^{2}+PX^{2}\right)  -\left(  AP^{2}%
++PY^{2}\right)  =PX^{2}-PY^{2}\\
+&  =\underbrace{\left(  PX-PY\right)  }_{=YX}\cdot\underbrace{\left(
+PX+PY\right)  }_{=2\cdot PX+XY}=YX\cdot\left(  2\cdot PX+XY\right)
+\end{align*}
+und analog%
+\[
+BX^{2}-BY^{2}=YX\cdot\left(  2\cdot QX+XY\right)  .
+\]
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{5.144in}{4.0977in}{0pt}{\Qcb{{}Zum Beweis des Lemmas}%
+%}{\Qlb{fig.21}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 5.144in;  height 4.0977in;  depth 0pt;
+%original-width 4.9796in;  original-height 3.9613in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'SteinerLem2.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.961300in,
+natwidth=4.979600in,
+height=4.0977in,
+width=5.144in
+]%
+{SteinerLem2.wmf}%
+\caption{{}Zum Beweis des Lemmas}%
+\label{fig.21}%
+\end{figure}
+%EndExpansion
+
+
+Somit gilt folgende \"{A}quivalenzenkette:%
+\begin{align*}
+&  \ \left(  AX^{2}-AY^{2}=BX^{2}-BY^{2}\right) \\
+&  \Longleftrightarrow\ \left(  YX\cdot\left(  2\cdot PX+XY\right)
+=YX\cdot\left(  2\cdot QX+XY\right)  \right)  \ \ \ \ \ \ \ \ \ \ \left(
+\text{nach obigen Gleichungen}\right) \\
+&  \Longleftrightarrow\ \left(  2\cdot PX+XY=2\cdot QX+XY\right)
+\ \ \ \ \ \ \ \ \ \ \left(  \text{denn }YX\neq0\right) \\
+&  \Longleftrightarrow\ \left(  PX=QX\right) \\
+&  \Longleftrightarrow\ \left(  P=Q\right)  \ \ \ \ \ \ \ \ \ \ \left(
+\text{denn }P\text{ und }Q\text{ liegen auf }XY\text{, und die Strecken sind
+orientiert}\right) \\
+&  \Longleftrightarrow\ \left(  XY\perp AB\right)
+\end{align*}
+(denn $P$ und $Q$ sind die Lotfu\ss punkte von $A$ bzw. $B$ auf $XY$). Damit
+ist das Lemma bewiesen.
+
+Die Gleichung $AX^{2}-AY^{2}=BX^{2}-BY^{2}$ in Lemma \ref{lem.steiner-lem}
+wird oft als $AX^{2}+BY^{2}=AY^{2}+BX^{2}$ geschrieben. Das Lemma l\"{a}\ss t
+sich somit wie folgt umformulieren: \textquotedblleft Die Diagonalen eines
+Vierecks $AXBY$ sind genau dann orthogonal, wenn die Summen der Quadrate
+gegen\"{u}berliegenden Seiten des Vierecks gleich sind.\textquotedblright.
+
+\textit{Beweis des Satzes von Carnot-Steiner:} Sei $P$ der Punkt, in dem die
+Senkrechte zu $BC$ durch $X$ die Senkrechte zu $CA$ durch $Y$ schneidet. Dann
+ist $XP\perp BC$ und $YP\perp CA$. Die Senkrechten zu $BC$, $CA$ und $AB$
+durch $X$, $Y$ bzw. $Z$ schneiden sich genau dann in einem Punkt, wenn auch
+die Senkrechte zu $AB$ durch $Z$ durch $P$ geht, d.h., wenn $ZP\perp AB$ ist.
+Wegen $XP\perp BC$ folgt aus Lemma \ref{lem.steiner-lem} die Gleichung%
+\[
+BX^{2}-BP^{2}=CX^{2}-CP^{2}=XC^{2}-CP^{2},
+\]
+also%
+\[
+BX^{2}-XC^{2}=BP^{2}-CP^{2}.
+\]
+Analog folgt aus $YP\perp CA$ die Gleichung%
+\[
+CY^{2}-YA^{2}=CP^{2}-AP^{2}.
+\]
+Wenn nun auch $ZP\perp AB$ gilt, dann erhalten wir ebenso%
+\[
+AZ^{2}-BZ^{2}=AP^{2}-BP^{2},
+\]
+und durch Addition aller drei Gleichungen erhalten wir%
+\begin{align*}
+&  BX^{2}-XC^{2}+CY^{2}-YA^{2}+AZ^{2}-ZB^{2}\\
+&  =BP^{2}-CP^{2}+CP^{2}-AP^{2}+AP^{2}-BP^{2}=0.
+\end{align*}
+Damit ist die $\Longrightarrow$-Richtung von Satz \ref{thm.carnot-steiner}
+bewiesen. Die $\Longleftarrow$-Richtung folgt durch Umkrehrung dieses Argumentes.
+
+Hier ist eine von vielen Anwendungen des Satzes von Carnot-Steiner:
+
+\begin{theorem}
+[Orthopolsatz]Sei $ABC$ ein Dreieck, und sei $g$ eine Gerade. Seien $X$, $Y$
+und $Z$ die Fu\ss punkte der Lote von $A$, $B$ bzw. $C$ auf $g$. Dann
+schneiden sich die Senkrechten zu $BC$, $CA$ und $AB$ durch $X$, $Y$ bzw. $Z$
+in einem Punkt.
+\end{theorem}
+
+Dieser Punkt hei\ss t der \textit{Orthopol} der Geraden $g$ in bezug auf
+Dreieck $ABC$. (Siehe Fig. \ref{fig.22}.)%
+
+%TCIMACRO{\FRAME{ftbpFU}{5.0313in}{2.9321in}{0pt}{\Qcb{Der Orthopol einer
+%Geraden $g$}}{\Qlb{fig.22}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 5.0313in;  height 2.9321in;  depth 0pt;
+%original-width 4.6035in;  original-height 2.672in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'Orthopol1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=2.672000in,
+natwidth=4.603500in,
+height=2.9321in,
+width=5.0313in
+]%
+{Orthopol1.wmf}%
+\caption{Der Orthopol einer Geraden $g$}%
+\label{fig.22}%
+\end{figure}
+%EndExpansion
+
+
+\textit{Beweis:} Nach Pythagoras ist $BX^{2}=BY^{2}+XY^{2}$ und $XC^{2}%
+=CZ^{2}+ZX^{2}$, also%
+\[
+BX^{2}-XC^{2}=\left(  BY^{2}+XY^{2}\right)  -\left(  CZ^{2}+ZX^{2}\right)  .
+\]
+Analog gelten \"{a}hnliche Formeln f\"{u}r $CY^{2}-YA^{2}$ und $AZ^{2}-ZB^{2}%
+$. Wenn man alle drei Formeln zusammenaddiert, k\"{u}rzt sich alles heraus und
+man erh\"{a}lt $0$. Nach Carnot-Steiner folgt hieraus die Behauptung.
+
+Hier ist eine weitere Anwendung des Satzes von Carnot-Steiner:
+
+\begin{theorem}
+[Satz von den orthologischen Dreiecken]Seien $ABC$ und $XYZ$ zwei
+nicht-entartete Dreiecke. Genau dann schneiden sich die Senkrechten zu $BC$,
+$CA$ und $AB$ durch $X$, $Y$ bzw. $Z$ in einem Punkt, wenn die Senkrechten zu
+$YZ$, $ZX$ und $XY$ durch $A$, $B$ bzw. $C$ sich in einem Punkt schneiden.
+\end{theorem}
+
+In diesem Fall hei\ss en die beiden Dreiecke $ABC$ und $XYZ$ zueinander
+\textit{orthologisch}. (Siehe Fig. \ref{fig.23}.)%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.845in}{3.6208in}{0pt}{\Qcb{Orthologische Dreiecke}%
+%}{\Qlb{fig.23}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 4.845in;  height 3.6208in;  depth 0pt;
+%original-width 4.4586in;  original-height 3.3251in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'Ortholog1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.325100in,
+natwidth=4.458600in,
+height=3.6208in,
+width=4.845in
+]%
+{Ortholog1.wmf}%
+\caption{Orthologische Dreiecke}%
+\label{fig.23}%
+\end{figure}
+%EndExpansion
+
+
+\textit{Beweis:} Laut dem Satz von Carnot-Steiner gilt:
+
+\begin{itemize}
+\item Genau dann schneiden sich die Senkrechten zu $BC$, $CA$ und $AB$ durch
+$X$, $Y$ bzw. $Z$ in einem Punkt, wenn die Gleichung%
+\[
+BX^{2}-XC^{2}+CY^{2}-YA^{2}+AZ^{2}-ZB^{2}=0
+\]
+gilt.
+
+\item Genau dann schneiden sich die Senkrechten zu $YZ$, $ZX$ und $XY$ durch
+$A$, $B$ bzw. $C$ in einem Punkt, wenn die Gleichung%
+\[
+YA^{2}-AZ^{2}+ZB^{2}-BX^{2}+XC^{2}-CY^{2}=0
+\]
+gilt.
+\end{itemize}
+
+Aber die beiden Gleichungen sind zueinander \"{a}quivalent, da die linke Seite
+der einen gleich der linken Seite der anderen mal $-1$ ist. Hieraus folgt der Satz.
+
+\textit{Warnung:} Der Satz von den orthologischen Dreiecken (wie auch der Satz
+von Carnot-Steiner) gilt nicht f\"{u}r entartete Dreiecke.
+
+K\"{o}nnen wir den Orthopolsatz aus dem Satz von den orthologischen Dreiecken
+herleiten? Das Dreieck $XYZ$ im Orthopolsatz ist entartet; somit k\"{o}nnen
+wir den Satz von den orthologischen Dreiecken nicht auf dieses Dreieck anwenden.
+
+Allerdings k\"{o}nnen wir folgendes tun:
+
+Wir spiegeln die Ecken $A$, $B$ und $C$ an der Geraden $g$. Die Spiegelbilder
+seien $X^{\prime}$, $Y^{\prime}$ bzw. $Z^{\prime}$ (siehe Fig. \ref{fig.24}).
+Nun werden wir
+
+\begin{enumerate}
+\item zeigen, dass die Dreiecke $ABC$ und $X^{\prime}Y^{\prime}Z^{\prime}$
+orthologisch sind, und dann
+
+\item den Orthopolsatz daraus herleiten.
+\end{enumerate}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{6.7155in}{5.5888in}{0pt}{\Qcb{Zweiter Beweis des
+%Orthopolsatzes}}{\Qlb{fig.24}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 6.7155in;  height 5.5888in;  depth 0pt;
+%original-width 6.5833in;  original-height 5.4744in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'Orthopol2.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=5.474400in,
+natwidth=6.583300in,
+height=5.5888in,
+width=6.7155in
+]%
+{Orthopol2.wmf}%
+\caption{Zweiter Beweis des Orthopolsatzes}%
+\label{fig.24}%
+\end{figure}
+%EndExpansion
+
+
+F\"{u}r Schritt 1 verwenden wir folgenden Satz:
+
+\begin{theorem}
+[Orthologie gegensinnig \"{a}hnlicher Dreiecke]\label{thm.ortholog-gegen}Seien
+$ABC$ und $XYZ$ zwei Dreiecke, die zueinander gegensinnig \"{a}hnlich sind.
+Dann sind diese zwei Dreiecke zueinander orthologisch. Mehr sogar:
+
+\textbf{(a)} Die Senkrechten zu $BC$, $CA$ und $AB$ durch $X$, $Y$ bzw. $Z$
+schneiden sich in einem Punkt auf dem Umkreis des Dreiecks $XYZ$. (Siehe Fig.
+\ref{fig.25}.)
+
+\textbf{(b)} Die Senkrechten zu $YZ$, $ZX$ und $XY$ durch $A$, $B$ bzw. $C$
+schneiden sich in einem Punkt auf dem Umkreis des Dreiecks $ABC$.
+\end{theorem}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.7052in}{4.2892in}{0pt}{\Qcb{Gegensinnig \"{a}hnliche
+%Dreiecke sind orthologisch}}{\Qlb{fig.25}}{Figure}%
+%{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 4.7052in;  height 4.2892in;  depth 0pt;  original-width 4.2053in;
+%original-height 3.8309in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";
+%tempfilename 'GegensinnigOrtholog1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.830900in,
+natwidth=4.205300in,
+height=4.2892in,
+width=4.7052in
+]%
+{GegensinnigOrtholog1.wmf}%
+\caption{Gegensinnig \"{a}hnliche Dreiecke sind orthologisch}%
+\label{fig.25}%
+\end{figure}
+%EndExpansion
+
+
+\textit{Beweis:} Winkeljagd!
+
+\textbf{(a)} (Siehe Fig. \ref{fig.26}.) Sei $P$ der von $X$ verschiedene
+Punkt, in dem die Senkrechte zu $BC$ durch $X$ den Umkreis des Dreiecks $XYZ$
+schneidet. (Wenn sie diesen Umkreis ber\"{u}hrt, dann setzt man $P=X$.) Mit
+orientierten Winkeln modulo $180^{\circ}$ gilt%
+\begin{align*}
+\measuredangle\left(  XP;\ YP\right)   &  =\measuredangle XPY=\measuredangle
+XZY\ \ \ \ \ \ \ \ \ \ \left(  \text{nach dem Umfangswinkelsatz}\right) \\
+&  =-\measuredangle ACB\ \ \ \ \ \ \ \ \ \ \left(  \text{da }\bigtriangleup
+XYZ\overset{-}{\sim}\Delta ABC\right) \\
+&  =-\measuredangle\left(  CA;\ BC\right)  =\measuredangle\left(
+BC;\ CA\right) \\
+&  =\underbrace{\measuredangle\left(  BC;\ XP\right)  }_{\substack{=90^{\circ
+}\\\text{(denn }XP\perp BC\text{)}}}+\measuredangle\left(  XP;\ CA\right) \\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{denn }\measuredangle\left(  g;\ k\right)  =\measuredangle\left(
+g;\ h\right)  +\measuredangle\left(  h;\ k\right)  \text{ gilt}\\
+\text{f\"{u}r beliebige drei Geraden }g\text{, }h\text{ und }k
+\end{array}
+\right) \\
+&  =90^{\circ}+\measuredangle\left(  XP;\ CA\right)  .
+\end{align*}
+Daher ist%
+\[
+90^{\circ}=\measuredangle\left(  XP;\ YP\right)  -\measuredangle\left(
+XP;\ CA\right)  =\measuredangle\left(  CA;\ YP\right)
+\]
+(denn $\measuredangle\left(  g;\ k\right)  -\measuredangle\left(
+g;\ h\right)  =\measuredangle\left(  h;\ k\right)  $ gilt f\"{u}r beliebige
+drei Geraden $g$, $h$ und $k$). Hieraus folgt $YP\perp CA$, und daher liegt
+$P$ auch auf der Senkrechten zu $CA$ durch $Y$. Analog liegt $P$ auf der
+Senkrechten zu $AB$ durch $Z$. Also schneiden sich die drei Senkrechten zu
+$BC$, $CA$ und $AB$ durch $X$, $Y$ bzw. $Z$ in einem Punkt auf dem Umkreis des
+Dreiecks $XYZ$ (n\"{a}mlich in $P$). Damit ist Teil \textbf{(a)} bewiesen.%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.6459in}{4.1748in}{0pt}{\Qcb{Zum Beweis}%
+%}{\Qlb{fig.26}}{Figure}{\special{ language "Scientific Word";
+%type "GRAPHIC";  maintain-aspect-ratio TRUE;  display "USEDEF";
+%valid_file "T";  width 4.6459in;  height 4.1748in;  depth 0pt;
+%original-width 4.2587in;  original-height 3.8233in;  cropleft "0";
+%croptop "1";  cropright "1";  cropbottom "0";
+%tempfilename 'GegensinnigOrtholog2.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.823300in,
+natwidth=4.258700in,
+height=4.1748in,
+width=4.6459in
+]%
+{GegensinnigOrtholog2.wmf}%
+\caption{Zum Beweis}%
+\label{fig.26}%
+\end{figure}
+%EndExpansion
+
+
+\textbf{(b)} folgt aus Teil \textbf{(a)}, wenn man die Rollen der zwei
+Dreiecke $ABC$ und $XYZ$ vertauscht.
+
+\textit{Zweiter Beweis des Orthopolsatzes (skizziert):} Seien $X^{\prime}$,
+$Y^{\prime}$ und $Z^{\prime}$ die Spiegelbilder von $X$, $Y$ bzw. $Z$ an der
+Geraden $g$. Dann sind die Lotfu\ss punkte $X$, $Y$ und $Z$ die Mittelpunkte
+der Strecken $AX^{\prime}$, $BY^{\prime}$ bzw. $CZ^{\prime}$.
+
+Aber da $X^{\prime}$, $Y^{\prime}$ und $Z^{\prime}$ die Spiegelbilder von $A$,
+$B$ bzw. $C$ an der Geraden $g$ sind, sind die Dreiecke $ABC$ und $X^{\prime
+}Y^{\prime}Z^{\prime}$ gegensinnig \"{a}hnlich (sogar kongruent), und daher
+laut Satz \ref{thm.ortholog-gegen} orthologisch. Die Senkrechten von
+$X^{\prime}$, $Y^{\prime}$ und $Z^{\prime}$ auf $BC$, $CA$ bzw. $AB$ schneiden
+sich also in einem Punkt $Q$. Die Senkrechten von $A$, $B$ und $C$ auf $BC$,
+$CA$ bzw. $AB$ schneiden sich aber auch in einem Punkt, n\"{a}mlich im
+H\"{o}henschnittpunkt $H$ des Dreiecks $ABC$. Hieraus folgt schnell, dass die
+Senkrechten von $X$, $Y$ und $Z$ auf $BC$, $CA$ bzw. $AB$ sich im Mittelpunkt
+von $HQ$ schneiden (denn $X$ ist ja der Mittelpunkt von $AX^{\prime}$ usw.,
+und somit hat man Mittelparallelen in Trapezen vorliegen). Damit ist der
+Orthopolsatz wieder gezeigt.
+
+\begin{exercise}
+Sei $ABC$ ein Dreieck, und sei $g$ eine Gerade durch den Umkreismittelpunkt
+des Dreiecks $ABC$. Sei $P$ der Orthopol der Geraden $g$ in bezug auf das
+Dreieck $ABC$. Sei $H$ der H\"{o}henschnittpunkt des Dreiecks $ABC$. Man
+zeige: Das Spiegelbild von $H$ an $P$ liegt auf dem Umkreis des Dreiecks
+$ABC$. (Siehe Fig. \ref{fig.27}.)
+\end{exercise}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.8551in}{4.2409in}{0pt}{\Qcb{Orthopol einer Geraden
+%durch den Umkreismittelpunkt}}{\Qlb{fig.27}}{Figure}%
+%{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 4.8551in;  height 4.2409in;  depth 0pt;  original-width 4.2587in;
+%original-height 3.7157in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";
+%tempfilename 'OrthopolUmkreis1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.715700in,
+natwidth=4.258700in,
+height=4.2409in,
+width=4.8551in
+]%
+{OrthopolUmkreis1.wmf}%
+\caption{Orthopol einer Geraden durch den Umkreismittelpunkt}%
+\label{fig.27}%
+\end{figure}
+%EndExpansion
+
+
+Hier ist eine weitere Anwendung des Satzes von den orthologischen Dreiecken:
+
+\begin{exercise}
+Sei $ABC$ ein Dreieck. Sei $P$ ein Punkt. Seien $X$, $Y$ und $Z$ die
+Fu\ss punkte der Lote von $P$ auf $BC$, $CA$ bzw. $AB$. Man zeige:
+
+\textbf{(a)} Die Senkrechten zu $YZ$, $ZX$ und $XY$ durch $A$, $B$ bzw. $C$
+schneiden sich in einem Punkt.
+
+\textbf{(b)} Diese Senkrechten sind genau die Spiegelbilder der Geraden $AP$,
+$BP$ bzw. $CP$ an den Winkelhalbierenden der Winkel $CAB$, $ABC$ bzw. $BCA$.
+
+\textbf{(c)} Man beweise den Satz vom isogonalen Punkt neu.
+\end{exercise}
+
+\begin{exercise}
+\label{aufg.AS-MN}Sei $ABC$ ein Dreieck, und seien $E$ und $F$ die
+Fu\ss punkte seiner von $B$ bzw. $C$ ausgehenden H\"{o}hen. Seien $M$, $S$ und
+$N$ die Mittelpunkte der Strecken $BF$, $EF$ bzw. $CE$. Man zeige:
+
+\textbf{(a)} Es gilt $AS\perp MN$.
+
+\textbf{(b)} Die Senkrechte zu $BS$ durch $M$ und die Senkrechte zu $CS$ durch
+$N$ schneiden sich auf der Mittelsenkrechten von $BC$. (Siehe Fig.
+\ref{fig.28}.)
+\end{exercise}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{4.4104in}{3.7436in}{0pt}{\Qcb{{}Zu Aufgabe
+%\ref{aufg.AS-MN}}}{\Qlb{fig.28}}{Figure}%
+%{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 4.4104in;  height 3.7436in;  depth 0pt;  original-width 4.2663in;
+%original-height 3.6157in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";  tempfilename 'ASMN1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=3.615700in,
+natwidth=4.266300in,
+height=3.7436in,
+width=4.4104in
+]%
+{ASMN1.wmf}%
+\caption{{}Zu Aufgabe \ref{aufg.AS-MN}}%
+\label{fig.28}%
+\end{figure}
+%EndExpansion
+
+
+\begin{exercise}
+Man beweise, dass der Satz von den orthologischen Dreiecken auch dann gilt,
+wenn man alle \textquotedblleft Senkrechten\textquotedblright\ durch
+\textquotedblleft Parallelen\textquotedblright\ ersetzt. Das hei\ss t:
+\end{exercise}
+
+\begin{theorem}
+Seien $ABC$ und $XYZ$ zwei nicht-entartete Dreiecke. Genau dann schneiden sich
+die Parallelen zu $BC$, $CA$ und $AB$ durch $X$, $Y$ bzw. $Z$ in einem Punkt,
+wenn die Parallelen zu $YZ$, $ZX$ und $XY$ durch $A$, $B$ bzw. $C$ sich in
+einem Punkt schneiden.
+\end{theorem}
+
+In diesem Fall hei\ss en die Dreiecke $ABC$ und $XYZ$ zueinander
+\emph{parallelologisch}.
+
+\begin{exercise}
+\label{aufg.gerg-nag-ortho}Sei $ABC$ ein Dreieck. Der Inkreis des Dreiecks
+$ABC$ ber\"{u}hre die Strecken $BC$, $CA$ und $AB$ in den Punkten $X$, $Y$
+bzw. $Z$. Der $A$-Ankreis des Dreiecks $ABC$ (also der Ankreis, der die
+Strecke $BC$ ber\"{u}hrt) ber\"{u}hre die Strecke $BC$ in $X^{\prime}$. Sei
+$x$ die Senkrechte von $X^{\prime}$ auf die Gerade $YZ$. Analog seien zwei
+Geraden $y$ und $z$ definiert. Man zeige, dass $x$, $y$ und $z$ sich in einem
+Punkt schneiden. (Siehe Fig. \ref{fig.29}.)
+\end{exercise}
+
+%
+
+%TCIMACRO{\FRAME{ftbpFU}{6.9595in}{5.1897in}{0pt}{\Qcb{{}Zu Aufgabe
+%\ref{aufg.gerg-nag-ortho}}}{\Qlb{fig.29}}{Figure}%
+%{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 6.9595in;  height 5.1897in;  depth 0pt;  original-width 6.4224in;
+%original-height 4.7831in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";
+%tempfilename 'GergNagelOrtholog1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=4.783100in,
+natwidth=6.422400in,
+height=5.1897in,
+width=6.9595in
+]%
+{GergNagelOrtholog1.wmf}%
+\caption{{}Zu Aufgabe \ref{aufg.gerg-nag-ortho}}%
+\label{fig.29}%
+\end{figure}
+%EndExpansion
+
+
+Die nachfolgende Aufgabe ergibt einen neuen Beweis des Satzes von den
+orthologischen Dreiecken, bei dem auch eine andere sehr n\"{u}tzliche
+Konfiguration hervortritt (eine verallgemeinerte Fermatkonfiguration, f\"{u}r
+alle denen der Name etwas sagt). Zun\"{a}chst einige Bezeichnungen:
+
+Wenn wir schreiben, dass zwei Dreiecke $ABC$ und $XYZ$ \"{a}hnlich sind,
+meinen wir immer, dass es eine \"{A}hnlichkeitsabbildung gibt, die $A$ auf $X$
+abbildet, $B$ auf $Y$ abbildet, und $C$ auf $Z$ abbildet. Entsprechende Ecken
+stehen also immer an der gleichen Stelle. Es gibt also einen Unterschied
+zwischen \textquotedblleft die Dreiecke $ABC$ und $XYZ$ sind
+\"{a}hnlich\textquotedblright\ und \textquotedblleft die Dreiecke $ABC$ und
+$YZX$ sind \"{a}hnlich\textquotedblright. Ferner nennen wir zwei \"{a}hnliche
+Dreiecke $ABC$ und $XYZ$ \textit{gleichsinnig \"{a}hnlich} oder
+\textit{gegensinnig \"{a}hnlich}, je nachdem, ob die
+\"{A}hnlichkeitsabbildung, die $A$, $B$ und $C$ auf $X$, $Y$ bzw. $Z$
+abbildet, gleichsinnig oder gegensinnig ist.
+
+Wenn $U$, $V$ und $W$ drei Punkte sind, dann bezeichnen wir den Umkreis des
+Dreiecks $UVW$ auch kurz als den \textquotedblleft Kreis $UVW$%
+\textquotedblright. Falls $U$, $V$ und $W$ auf einer Geraden liegen, wird
+diese Gerade als \textquotedblleft Kreis $UVW$\textquotedblright\ verstanden.%
+
+%TCIMACRO{\FRAME{ftbpFU}{6.4681in}{6.1225in}{0pt}{\Qcb{{}Zu Aufgabe
+%\ref{aufg.double-staerk}}}{\Qlb{fig.30}}{Figure}%
+%{\special{ language "Scientific Word";  type "GRAPHIC";
+%maintain-aspect-ratio TRUE;  display "USEDEF";  valid_file "T";
+%width 6.4681in;  height 6.1225in;  depth 0pt;  original-width 6.6452in;
+%original-height 6.2885in;  cropleft "0";  croptop "1";  cropright "1";
+%cropbottom "0";  tempfilename 'Staerk1.wmf';tempfile-properties "XNPR";}}}%
+%BeginExpansion
+\begin{figure}[ptb]%
+\centering
+\includegraphics[
+natheight=6.288500in,
+natwidth=6.645200in,
+height=6.1225in,
+width=6.4681in
+]%
+{Staerk1.wmf}%
+\caption{{}Zu Aufgabe \ref{aufg.double-staerk}}%
+\label{fig.30}%
+\end{figure}
+%EndExpansion
+
+
+\begin{exercise}
+\label{aufg.double-staerk}Seien $ABC$ und $XYZ$ zwei Dreiecke.
+
+Seien drei Punkte $A^{\prime}$, $B^{\prime}$ und $C^{\prime}$ so gew\"{a}hlt,
+dass die Dreiecke $A^{\prime}BC$, $AB^{\prime}C$ und $ABC^{\prime}$ jeweils
+zum Dreieck $XYZ$ gegensinnig \"{a}hnlich sind.
+
+\textbf{(a)} Man zeige: Die Kreise $A^{\prime}BC$, $AB^{\prime}C$ und
+$ABC^{\prime}$ und die Geraden $AA^{\prime}$, $BB^{\prime}$ und $CC^{\prime}$
+schneiden sich in einem Punkt $P$. (Siehe Fig. \ref{fig.30}.)
+
+Seien drei Punkte $X^{\prime}$, $Y^{\prime}$ und $Z^{\prime}$ so gew\"{a}hlt,
+dass die Dreiecke $X^{\prime}YZ$, $XY^{\prime}Z$ und $XYZ^{\prime}$ jeweils
+zum Dreieck $ABC$ gegensinnig \"{a}hnlich sind.
+
+\textbf{(b)} Man zeige: Die Kreise $X^{\prime}YZ$, $XY^{\prime}Z$ und
+$XYZ^{\prime}$ und die Geraden $XX^{\prime}$, $YY^{\prime}$ und $ZZ^{\prime}$
+schneiden sich in einem Punkt $Q$.
+
+\textbf{(c)} Man zeige: $\measuredangle\left(  AA^{\prime};\ YZ\right)
+=-\measuredangle\left(  XX^{\prime};\ BC\right)  $. Hierbei ist
+$\measuredangle\left(  g;\ h\right)  $ der orientierte Winkel zwischen zwei
+Geraden $g$ und $h$ (ein orientierter Winkel modulo $180^{\circ}$).
+
+\textbf{(d)} Man zeige: Genau dann ist $AA^{\prime}\perp YZ$, wenn
+$XX^{\prime}\perp BC$ ist.
+
+\textbf{(e)} Man folgere den Satz von den orthologischen Dreiecken.
+
+Jetzt nehmen wir an, dass das Dreieck $XYZ$ gleichseitig und zum Dreieck $ABC$
+gleich orientiert ist. Die Dreiecke $A^{\prime}BC$, $AB^{\prime}C$ und
+$ABC^{\prime}$ sind also gleichseitige Dreiecke, die auf den Seiten $BC$, $CA$
+bzw. $AB$ des Dreiecks $ABC$ nach au\ss en hin aufgesetzt wurden. Der Punkt
+$P$ hei\ss t dann der \emph{erste Fermatpunkt} des Dreiecks $ABC$. Unter
+diesen Behauptungen zeige man folgendes:
+
+\textbf{(f)} Es gilt $AA^{\prime}=BB^{\prime}=CC^{\prime}=AP+BP+CP$.
+
+\textbf{(g)} Wir nehmen an, dass alle Winkel des Dreiecks $ABC$ kleiner oder
+gleich $120^{\circ}$ sind. Dann ist $P$ derjenige Punkt in der Ebene, f\"{u}r
+den die Summe der Abst\"{a}nde zu $A$, $B$ und $C$ minimal ist; das hei\ss t,
+wir haben%
+\[
+AP+BP+CP\leq AR+BR+CR
+\]
+f\"{u}r alle Punkte $R$.
+\end{exercise}
+
+
+\end{document}
